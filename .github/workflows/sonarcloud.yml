@@ -43,6 +43,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print current working directory
+        run: pwd  
       - name: List directory contents
         run: ls -R
       - name: Analyze with SonarCloud
