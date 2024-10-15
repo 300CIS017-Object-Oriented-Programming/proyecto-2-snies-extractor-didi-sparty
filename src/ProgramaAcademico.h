@@ -52,6 +52,7 @@ class ProgramaAcademico
 
 public:
     ProgramaAcademico();
+    ~ProgramaAcademico();
 
     void setCodigoDeLaInstitucion(int);
     int getCodigoDeLaInstitucion();
@@ -114,35 +115,49 @@ public:
 
     void setIdArea(int);
     int getIdArea();
+
     void setAreaDeConocimiento(string &);
     string getAreaDeConocimiento();
+
     void setIdNucleo(int);
     int getIdNucleo();
+
     void setNucleoBasicoDelConocimientoNbc(string &);
     string getNucleoBasicoDelConocimientoNbc();
+
     void setIdCineCampoAmplio(int);
     int getIdCineCampoAmplio();
+
     void setDescCineCampoAmplio(string &);
     string getDescCineCampoAmplio();
+
     void setIdCineCampoEspecifico(int);
     int getIdCineCampoEspecifico();
+
     void setDescCineCampoEspecifico(string &);
     string getDescCineCampoEspecifico();
+
     void setIdCineCodigoDetallado(int);
     int getIdCineCodigoDetallado();
+
     void setDescCineCodigoDetallado(string &);
     string getDescCineCodigoDetallado();
+
     void setCodigoDelDepartamentoPrograma(int);
     int getCodigoDelDepartamentoPrograma();
+
     void setDepartamentoDeOfertaDelPrograma(string &);
     string getDepartamentoDeOfertaDelPrograma();
+
     void setCodigoDelMunicipioPrograma(int);
     int getCodigoDelMunicipioPrograma();
+
     void setMunicipioDeOfertaDelPrograma(string &);
     string getMunicipioDeOfertaDelPrograma();
+
     void setConsolidado(Consolidado *, int);
+
     Consolidado *getConsolidado(int);
-    ~ProgramaAcademico();
 };
 
 #endif
