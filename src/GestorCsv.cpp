@@ -17,9 +17,17 @@ vector<int> GestorCsv::leerProgramasCsv(string &ruta)
         // Leer los programas
         while (getline(archivoProgramasCsv, linea))
         {
+            cout << "leyendo linea " << linea << endl;
             stringstream streamLinea(linea);
-            getline(streamLinea, dato, ';');
-            codigosSniesRetorno.push_back(stoi(dato));
+            if (getline(streamLinea, dato, ';')){
+                try {
+                    codigosSniesRetorno.push_back(stoi(dato));
+                } catch (invalid_argument &e) {
+                    cerr << "Error de conversión: " << e.what() << endl;  // si es un dato invalido
+                } catch (out_of_range &e) {
+                    cerr << "Número fuera de rango " << e.what() << endl;  // si es un numero que un int no puede soportar
+                }
+            }
         }
     }
     archivoProgramasCsv.close();
