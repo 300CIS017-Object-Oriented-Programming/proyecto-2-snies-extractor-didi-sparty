@@ -4,7 +4,7 @@
 
 JsonController::JsonController() = default;
 
-void JsonController::newJson(const string& fileName){
+void JsonController::newFile(const string& fileName){
     ofstream file(fileName);
     if (file.is_open()) {
         file << "{}";
