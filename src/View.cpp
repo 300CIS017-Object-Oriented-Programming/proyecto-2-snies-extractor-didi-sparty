@@ -31,8 +31,8 @@ bool View::mostrarPantallaBienvenido()
     cout << "y todos los archivo CSV del SNIES." << endl;
     cout << "Si ya hizo esto, escriba 'Y', de lo contrario 'N', y Enter: " << endl;
     char userAnswer = 'Y'; // FIXME cuando se arregle el debugger
-    // cin >> userAnswer;
-    // cout << endl;
+    //cin >> userAnswer;
+    //cout << endl;
     // FIXME verificar que el usuario ingree un valor igual al esperado incluir todo dentro de un while para
     // para asegurar que el usuario ingrese un valor valido
     // pasarlo a un método que se pueda usar en otros lugares
@@ -114,7 +114,7 @@ void View::mostrarDatosExtra()
 {
     char opcionYN;
     cout << "A continuacion vamos a mostrar datos relevantes de los programas academicos seleccionados" << "\n"
-         << endl;
+        << endl;
     cout << "Desea Convertir los datos a un archivo CSV?(Y/N): " << endl;
     cin >> opcionYN;
     opcionYN = tolower(opcionYN);
@@ -173,7 +173,7 @@ void View::buscarPorPalabraClaveYFormacion()
             while ((idFormacionAcademica > 10) || (idFormacionAcademica == 9) || (idFormacionAcademica < 1))
             {
                 cout << "Seleccione una opcion entre 1-10 excluyendo el 9\n"
-                     << endl;
+                    << endl;
                 cin >> idFormacionAcademica;
             }
 
