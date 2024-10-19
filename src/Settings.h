@@ -30,6 +30,10 @@ public:
     // En la clase Settings, las variables ADMITIDOS_FILE_PATH, MATRICULADOS_FILE_PATH y ETC se declaran como static const std::string. Esto significa que son constantes de tipo string que pertenecen a la clase en lugar de a instancias individuales de la clase.
     static const fs::path BASE_PATH;
     static const fs::path PROGRAMAS_FILTRAR_FILE_PATH;
+    static const fs::path INPUT_PATH;
+    static const fs::path OUTPUT_PATH;
+
+
 
 
 
@@ -41,9 +45,10 @@ public:
 
 // Declaración:
 // Inicialización: La inicialización de estas variables se realiza fuera de la clase. Esto es necesario porque las variables estáticas deben ser definidas en un solo lugar en el archivo de implementación (o en el mismo archivo, pero fuera de la clase) para que el compilador sepa cuánto espacio reservar en memoria.
-const fs::path Settings::BASE_PATH = fs::current_path() / fs::path(R"(..\docs\inputs)");
-const fs::path Settings::PROGRAMAS_FILTRAR_FILE_PATH = BASE_PATH / fs::path(R"(\programas.csv)");
-
+const fs::path Settings::BASE_PATH = fs::current_path() / fs::path(R"(..\docs\)");
+const fs::path Settings::PROGRAMAS_FILTRAR_FILE_PATH = BASE_PATH / fs::path(R"(inputs\programas.csv)");
+const fs::path Settings::INPUT_PATH = BASE_PATH / fs::path(R"(inputs\)");
+const fs::path Settings::OUTPUT_PATH = BASE_PATH / fs::path(R"(outputs\)");
 
 const fs::path Settings::DELIMITADOR = ";";
 
