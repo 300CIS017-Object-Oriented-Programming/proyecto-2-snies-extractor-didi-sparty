@@ -31,7 +31,7 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
     int posicion;
     int columna;
     // cout << "antes leer programas csv" << endl;
-    codigosSnies = gestorCsvObj.leerProgramasCsv(rutaProgramasCSV);
+    codigosSnies = CsvReaderObj.leerProgramasCsv(rutaProgramasCSV);
     // cout << "despues leer programas csv" << endl;
     programasAcademicosVector = gestorCsvObj.leerArchivoPrimera(rutaAdmitidos, ano1, codigosSnies);
     // cout << "despues leer archivos Primera" << endl;

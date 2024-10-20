@@ -9,6 +9,7 @@
 #include "ProgramaAcademico.h"
 #include "Consolidado.h"
 #include "GestorCsv.h"
+#include "read-write/CsvReader.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ class SNIESController
 private:
     map<int, ProgramaAcademico *> programasAcademicos;
     GestorCsv gestorCsvObj;
+    CsvReader CsvReaderObj;
     vector<string> etiquetasColumnas;
     string rutaProgramasCSV;
     string rutaAdmitidos;
