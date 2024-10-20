@@ -124,7 +124,7 @@ vector<vector<string>> CsvReader::leerArchivoPrimera(string &rutaBase, string &a
 
     archivoPrimero.close();
 
-    /*// Imprimir matriz resultado para verificaciones
+    // Imprimir matriz resultado para verificaciones
     for (int h = 0; h < matrizResultado.size(); h++)
     {
         for (int k = 0; k < matrizResultado[h].size(); k++)
@@ -136,7 +136,7 @@ vector<vector<string>> CsvReader::leerArchivoPrimera(string &rutaBase, string &a
             }
         }
         cout << endl;
-    }*/
+    }
     return matrizResultado;
 }
 
