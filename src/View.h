@@ -20,6 +20,9 @@ public:
     void buscarPorPalabraClaveYFormacion();
     void salir();
     bool isConvetibleToInt(const string &);
+    char obtenerEntradaUsuario(const string &mensaje, const string &opcionesValidas);
+    string obtenerAnoValido(const string &mensaje);
+    void intercambiarAnos(string &ano1, string &ano2);
 };
 
 #endif

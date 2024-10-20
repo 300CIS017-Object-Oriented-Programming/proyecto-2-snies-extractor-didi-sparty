@@ -53,6 +53,7 @@ void View::intercambiarAnos(string &ano1, string &ano2)
     {
         string temp = ano1;
         ano1 = ano2;
+        
         ano2 = temp;
     }
 }
