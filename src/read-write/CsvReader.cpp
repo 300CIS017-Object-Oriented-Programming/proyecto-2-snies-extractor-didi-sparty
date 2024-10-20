@@ -1,12 +1,14 @@
 #include "CsvReader.h"
 
-vector<int> CsvReader::leerProgramasCsv(string &ruta)
+#include "../Settings.h"
+
+vector<int> CsvReader::leerProgramasCsv()
 {
     vector<int> codigosSniesRetorno;
-    ifstream archivoProgramasCsv(ruta);
+    ifstream archivoProgramasCsv(Settings::PROGRAMAS_FILTRAR_FILE_PATH);
     if (!(archivoProgramasCsv.is_open()))
     {
-        cout << "Archivo " << ruta << " no se pudo abrir correctamente" << endl;
+        cout << "Archivo " << Settings::PROGRAMAS_FILTRAR_FILE_PATH << " no se pudo abrir correctamente" << endl;
     }
     else
     {
@@ -19,7 +21,7 @@ vector<int> CsvReader::leerProgramasCsv(string &ruta)
         {
             cout << "leyendo linea " << linea << endl;
             stringstream streamLinea(linea);
-            if (getline(streamLinea, dato, ';'))
+            if (getline(streamLinea, dato, Settings::DELIMITADOR))
             {
                 try
                 {

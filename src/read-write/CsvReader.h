@@ -14,6 +14,7 @@ using namespace std;
 #include <algorithm>
 #include "ProgramaAcademico.h"
 #include "Consolidado.h"
+#include "../Setttings.h"
 
 
 class CsvReader
@@ -25,7 +26,7 @@ public:
      * @return Devuelve un vector<int> con los codigos SNIES
      */
     //FIXME: actualmente tiene parametros pero hay que quitarselos y reemplazarlo por #include settings
-    vector<int> leerProgramasCsv(string &ruta);
+    vector<int> leerProgramasCsv();
 
     vector<vector<string>> leerArchivo(string &rutaBase, string &ano, vector<int> &codigosSnies, int colmunaCodigoSnies);
     vector<vector<string>> leerArchivoPrimera(string &rutaBase, string &ano, vector<int> &codigosSnies);
