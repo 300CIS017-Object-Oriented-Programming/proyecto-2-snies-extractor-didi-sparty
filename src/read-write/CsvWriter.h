@@ -14,11 +14,11 @@
 #include <algorithm>
 #include "../ProgramaAcademico.h"
 #include "../Consolidado.h"
+#include "WriteManager.h"
 
 using namespace std;
 
-class CsvWriter
-{
+class CsvWriter : public WriteManager {
 public:
     CsvWriter() = default;
     bool crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapadeProgramasAcademicos, vector<string> etiquetasColumnas);
