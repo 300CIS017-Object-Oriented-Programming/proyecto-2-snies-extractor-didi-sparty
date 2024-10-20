@@ -114,7 +114,7 @@ void View::mostrarDatosExtra()
 {
     char opcionYN;
     cout << "A continuacion vamos a mostrar datos relevantes de los programas academicos seleccionados" << "\n"
-         << endl;
+        << endl;
     cout << "Desea Convertir los datos a un archivo CSV?(Y/N): " << endl;
     cin >> opcionYN;
     opcionYN = tolower(opcionYN);
@@ -173,7 +173,7 @@ void View::buscarPorPalabraClaveYFormacion()
             while ((idFormacionAcademica > 10) || (idFormacionAcademica == 9) || (idFormacionAcademica < 1))
             {
                 cout << "Seleccione una opcion entre 1-10 excluyendo el 9\n"
-                     << endl;
+                    << endl;
                 cin >> idFormacionAcademica;
             }
 
