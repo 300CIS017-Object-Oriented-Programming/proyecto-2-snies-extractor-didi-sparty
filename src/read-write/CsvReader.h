@@ -14,11 +14,10 @@ using namespace std;
 #include <algorithm>
 #include "../ProgramaAcademico.h"
 #include "../Consolidado.h"
-#include "../Setttings.h"
+#include "../Settings.h"
 
 
-class CsvReader
-{
+class CsvReader {
 public:
     CsvReader() = default;
     /*

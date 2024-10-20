@@ -1,6 +1,6 @@
 #include "CsvReader.h"
 
-#include "../Settings.h"
+
 
 vector<int> CsvReader::leerProgramasCsv()
 {
