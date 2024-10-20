@@ -1,12 +1,12 @@
 #include "GestorCsv.h"
 // FIXME: LA LECTURA DE ARCHIVOS CON GETLINE FUNCIONA HORRIBLEMENTE, NO TENEMOS IDEA DE POR QUÉ
-vector<int> GestorCsv::leerProgramasCsv(string &ruta)
+vector<int> GestorCsv::leerProgramasCsv()
 {
     vector<int> codigosSniesRetorno;
-    ifstream archivoProgramasCsv(ruta);
+    ifstream archivoProgramasCsv(Settings::PROGRAMAS_FILTRAR_FILE_PATH);
     if (!(archivoProgramasCsv.is_open()))
     {
-        cout << "Archivo " << ruta << " no se pudo abrir correctamente" << endl;
+        cout << "Archivo " << Settings::PROGRAMAS_FILTRAR_FILE_PATH << " no se pudo abrir correctamente" << endl;
     }
     else
     {
@@ -18,7 +18,7 @@ vector<int> GestorCsv::leerProgramasCsv(string &ruta)
         while (getline(archivoProgramasCsv, linea))
         {
             stringstream streamLinea(linea);
-            getline(streamLinea, dato, ';');
+            getline(streamLinea, dato, Settings::DELIMITADOR);
             codigosSniesRetorno.push_back(stoi(dato));
         }
     }
@@ -49,7 +49,7 @@ vector<vector<string>> GestorCsv::leerArchivoPrimera(string &rutaBase, string &a
         vectorFila = vector<string>(39);
         streamFila = stringstream(fila);
         columna = 0;
-        while ((getline(streamFila, dato, ';')))
+        while ((getline(streamFila, dato, Settings::DELIMITADOR)))
         {
             vectorFila[columna] = dato;
             columna++;
@@ -61,7 +61,7 @@ vector<vector<string>> GestorCsv::leerArchivoPrimera(string &rutaBase, string &a
         {
             streamFila = stringstream(fila);
             columna = 0;
-            while ((getline(streamFila, dato, ';')) && (columna < 13))
+            while ((getline(streamFila, dato,Settings::DELIMITADOR)) && (columna < 13))
             {
                 vectorFila[columna] = dato;
                 columna++;
@@ -83,7 +83,7 @@ vector<vector<string>> GestorCsv::leerArchivoPrimera(string &rutaBase, string &a
                 // Termino de leer y guardar primera fila
                 vectorFila[columna] = dato; // Guardamos el dato que habiamos geteado justo antes de hacer la verificacion
                 columna++;
-                while ((getline(streamFila, dato, ';')))
+                while ((getline(streamFila, dato, Settings::DELIMITADOR)))
                 {
                     vectorFila[columna] = dato;
                     columna++;
@@ -96,7 +96,7 @@ vector<vector<string>> GestorCsv::leerArchivoPrimera(string &rutaBase, string &a
                     getline(archivoPrimero, fila);
                     streamFila = stringstream(fila);
                     columna = 0;
-                    while ((getline(streamFila, dato, ';')))
+                    while ((getline(streamFila, dato, Settings::DELIMITADOR)))
                     {
                         vectorFila[columna] = dato;
                         columna++;
@@ -154,7 +154,7 @@ vector<vector<string>> GestorCsv::leerArchivoSegunda(string &rutaBase, string &a
             streamFila = stringstream(fila);
             columnaArchivo = 0;
             columnaVector = 0;
-            while ((getline(streamFila, dato, ';')) && (columnaArchivo < 13))
+            while ((getline(streamFila, dato, Settings::DELIMITADOR)) && (columnaArchivo < 13))
             {
                 if (columnaArchivo == 12)
                 {
@@ -179,7 +179,7 @@ vector<vector<string>> GestorCsv::leerArchivoSegunda(string &rutaBase, string &a
             {
                 // Termino de leer y guardar primera fila
                 columnaArchivo++; // Esto se debe a la iteracion en que hacemos getline sin subirle a la columaArchivo porque nos salimos del bucle
-                while (getline(streamFila, dato, ';'))
+                while (getline(streamFila, dato, Settings::DELIMITADOR))
                 {
                     if (columnaArchivo >= 34)
                     {
@@ -197,7 +197,7 @@ vector<vector<string>> GestorCsv::leerArchivoSegunda(string &rutaBase, string &a
                     streamFila = stringstream(fila);
                     columnaArchivo = 0;
                     columnaVector = 0;
-                    while (getline(streamFila, dato, ';'))
+                    while (getline(streamFila, dato, Settings::DELIMITADOR))
                     {
                         if ((columnaArchivo >= 34) || (columnaArchivo == 12))
                         {
@@ -264,7 +264,7 @@ vector<vector<string>> GestorCsv::leerArchivo(string &rutaBase, string &ano, vec
             streamFila = stringstream(fila);
             columnaArchivo = 0;
             columnaVector = 0;
-            while ((getline(streamFila, dato, ';')) && (columnaArchivo < (colmunaCodigoSnies + 1)))
+            while ((getline(streamFila, dato, Settings::DELIMITADOR)) && (columnaArchivo < (colmunaCodigoSnies + 1)))
             {
                 if (columnaArchivo == colmunaCodigoSnies)
                 {
@@ -288,7 +288,7 @@ vector<vector<string>> GestorCsv::leerArchivo(string &rutaBase, string &ano, vec
             if (it != codigosSnies.end()) // Caso cuando SI es parte de los que me interesan
             {
                 // Terminar de leer primera fila
-                while (getline(streamFila, dato, ';'))
+                while (getline(streamFila, dato, Settings::DELIMITADOR))
                 {
                 }
                 vectorFila[columnaVector] = dato;
@@ -301,7 +301,7 @@ vector<vector<string>> GestorCsv::leerArchivo(string &rutaBase, string &ano, vec
                     streamFila = stringstream(fila);
                     columnaArchivo = 0;
                     columnaVector = 0;
-                    while (getline(streamFila, dato, ';'))
+                    while (getline(streamFila, dato, Settings::DELIMITADOR))
                     {
                         if (columnaArchivo == colmunaCodigoSnies)
                         {
@@ -534,7 +534,7 @@ bool GestorCsv::crearArchivoExtra(string &ruta, vector<vector<string>> datosAImp
                 archivoExtra << datosAImprimir[i][j];
                 if (j != (datosAImprimir[i].size() - 1))
                 {
-                    archivoExtra << ";";
+                    archivoExtra << Settings::DELIMITADOR;
                 }
             }
             // Saltamos de linea al terminar una fila
