@@ -2,11 +2,10 @@
 
 using namespace std;
 
-SNIESController::SNIESController(string &nuevaRutaProgramasCSV, string &nuevaRutaAdmitidos, string &nuevaRutaGraduados, string &nuevaRutaInscritos, string &nuevaRutaMatriculadosc, string &nuevaRutaMatriculadosPrimerSemestre, string &nuevaRutaOutput)
+SNIESController::SNIESController( string &nuevaRutaAdmitidos, string &nuevaRutaGraduados, string &nuevaRutaInscritos, string &nuevaRutaMatriculadosc, string &nuevaRutaMatriculadosPrimerSemestre, string &nuevaRutaOutput)
 {
     // FIXME quitar los parámetros de las rutas de los parametros del constructor, usar el archivo de settings.h para poner las constantes
     gestorCsvObj = GestorCsv();
-    rutaProgramasCSV = nuevaRutaProgramasCSV;
     rutaAdmitidos = nuevaRutaAdmitidos;
     rutaGraduados = nuevaRutaGraduados;
     rutaInscritos = nuevaRutaInscritos;
@@ -31,7 +30,7 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
     int posicion;
     int columna;
     // cout << "antes leer programas csv" << endl;
-    codigosSnies = gestorCsvObj.leerProgramasCsv(rutaProgramasCSV);
+    codigosSnies = gestorCsvObj.leerProgramasCsv();
     // cout << "despues leer programas csv" << endl;
     programasAcademicosVector = gestorCsvObj.leerArchivoPrimera(rutaAdmitidos, ano1, codigosSnies);
     // cout << "despues leer archivos Primera" << endl;

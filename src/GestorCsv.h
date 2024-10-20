@@ -10,6 +10,7 @@
 #include <algorithm>
 #include "ProgramaAcademico.h"
 #include "Consolidado.h"
+#include "Settings.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ class GestorCsv
 {
 public:
     GestorCsv() = default;
-    vector<int> leerProgramasCsv(string &ruta);
+    vector<int> leerProgramasCsv();
     vector<vector<string>> leerArchivoPrimera(string &rutaBase, string &ano, vector<int> &codigosSnies);
     vector<vector<string>> leerArchivoSegunda(string &rutaBase, string &ano, vector<int> &codigosSnies);
     vector<vector<string>> leerArchivo(string &rutaBase, string &ano, vector<int> &codigosSnies, int colmunaCodigoSnies);
