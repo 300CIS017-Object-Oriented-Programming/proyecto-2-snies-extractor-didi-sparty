@@ -3,10 +3,10 @@
 
 
 #include <iostream>
-#include "FileManager.h"
+#include "WriteManager.h"
 
 
-class TxtWriter : public FileManager{
+class TxtWriter : public WriteManager{
     private:
         string txtData;
     public:

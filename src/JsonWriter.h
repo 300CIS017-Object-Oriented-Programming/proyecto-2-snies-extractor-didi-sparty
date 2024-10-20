@@ -4,12 +4,12 @@
 #include <iostream>
 #include "json.hpp"
 #include <string>
-#include "FileManager.h"
+#include "WriteManager.h"
 
 using json = nlohmann::json;
 using namespace std;
 
-class JsonWriter : public FileManager{
+class JsonWriter : public WriteManager{
     private:
         json jsonData;
     public:
