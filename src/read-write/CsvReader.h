@@ -12,20 +12,15 @@ using namespace std;
 #include <sstream>
 #include <list>
 #include <algorithm>
-#include "ProgramaAcademico.h"
-#include "Consolidado.h"
-#include "../Setttings.h"
+#include "../ProgramaAcademico.h"
+#include "../Consolidado.h"
+#include "../Settings.h"
 
 
-class CsvReader
-{
+class CsvReader {
 public:
     CsvReader() = default;
-    /*
-     * @brief Lee el archivo programas.csv y busca los codigos SNIES que hay que filtrar
-     * @return Devuelve un vector<int> con los codigos SNIES
-     */
-    //FIXME: actualmente tiene parametros pero hay que quitarselos y reemplazarlo por #include settings
+
     vector<int> leerProgramasCsv();
 
     vector<vector<string>> leerArchivo(string &rutaBase, string &ano, vector<int> &codigosSnies, int colmunaCodigoSnies);
