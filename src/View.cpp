@@ -23,7 +23,8 @@ View::~View()
 char View::obtenerEntradaUsuario(const string &mensaje, const string &opcionesValidas)
 {
     char entrada;
-    while (int i = 0)
+    int i = 0;
+    while (i == 0)
     {
         cout << mensaje << endl;
         cin >> entrada;
@@ -37,7 +38,8 @@ char View::obtenerEntradaUsuario(const string &mensaje, const string &opcionesVa
 string View::obtenerAnoValido(const string &mensaje)
 {
     string ano;
-    while (int i = 0)
+    int i = 0;
+    while (i == 0)
     {
         cout << mensaje << endl;
         cin >> ano;
