@@ -1,5 +1,5 @@
-#ifndef JSONWRITER_H
-#define JSONWRITER_H
+#ifndef JSON_WRITER_H
+#define JSON_WRITER_H
 
 #include <iostream>
 #include "../../include/json.hpp"
