@@ -31,8 +31,8 @@ bool View::mostrarPantallaBienvenido()
     cout << "y todos los archivo CSV del SNIES." << endl;
     cout << "Si ya hizo esto, escriba 'Y', de lo contrario 'N', y Enter: " << endl;
     char userAnswer = 'Y'; // FIXME cuando se arregle el debugger
-    // cin >> userAnswer;
-    // cout << endl;
+    cin >> userAnswer;
+    cout << endl;
     // FIXME verificar que el usuario ingree un valor igual al esperado incluir todo dentro de un while para
     // para asegurar que el usuario ingrese un valor valido
     // pasarlo a un método que se pueda usar en otros lugares
