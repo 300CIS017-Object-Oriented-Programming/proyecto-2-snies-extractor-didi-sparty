@@ -1,7 +1,11 @@
-#include "GestorCsv.h"
-// FIXME: LA LECTURA DE ARCHIVOS CON GETLINE FUNCIONA HORRIBLEMENTE, NO TENEMOS IDEA DE POR QUÉ
+//
+// Created by Samuel Bonilla on 20/10/2024.
+//
 
-bool GestorCsv::crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapadeProgramasAcademicos, vector<string> etiquetasColumnas)
+
+#include "CsvWriter.h"
+
+bool CsvWriter::crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapadeProgramasAcademicos, vector<string> etiquetasColumnas)
 {
     // Este bool nos ayudará a saber si se creo exitosamente el archivo
     bool estadoCreacion = false;
@@ -85,7 +89,7 @@ bool GestorCsv::crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapade
     return estadoCreacion;
 }
 
-bool GestorCsv::crearArchivoBuscados(string &ruta, list<ProgramaAcademico *> &programasBuscados, vector<string> etiquetasColumnas)
+bool CsvWriter::crearArchivoBuscados(string &ruta, list<ProgramaAcademico *> &programasBuscados, vector<string> etiquetasColumnas)
 {
     // Este bool nos ayudará a saber si se creo exitosamente el archivo
     bool estadoCreacion = false;
@@ -170,7 +174,7 @@ bool GestorCsv::crearArchivoBuscados(string &ruta, list<ProgramaAcademico *> &pr
     return estadoCreacion;
 }
 
-bool GestorCsv::crearArchivoExtra(string &ruta, vector<vector<string>> datosAImprimir)
+bool CsvWriter::crearArchivoExtra(string &ruta, vector<vector<string>> datosAImprimir)
 {
     // Este bool nos ayudará a saber si se creo el archivo exitosamente
     bool estadoCreacion = false;
