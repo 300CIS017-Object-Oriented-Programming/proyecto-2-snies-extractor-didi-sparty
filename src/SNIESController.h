@@ -18,8 +18,8 @@ class SNIESController
 
 private:
     map<int, ProgramaAcademico *> programasAcademicos;
-    CsvWriter gestorCsvObj;
-    CsvReader CsvReaderObj;
+    CsvWriter writeCsvObj;
+    CsvReader csvReaderObj;
     vector<string> etiquetasColumnas;
     string rutaProgramasCSV;
     string rutaAdmitidos;
