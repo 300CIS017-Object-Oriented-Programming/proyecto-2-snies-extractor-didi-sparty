@@ -14,7 +14,7 @@
 #include <algorithm>
 #include "../ProgramaAcademico.h"
 #include "../Consolidado.h"
-#include "WriteManager.h""
+#include "WriteManager.h"
 
 using namespace std;
 

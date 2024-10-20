@@ -2,7 +2,7 @@
 #define JSONWRITER_H
 
 #include <iostream>
-#include "json.hpp"
+#include "../../include/json.hpp"
 #include <string>
 #include "WriteManager.h"
 
