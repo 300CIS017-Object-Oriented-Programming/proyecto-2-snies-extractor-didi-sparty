@@ -30,11 +30,11 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
     vector<vector<string>> programasAcademicosVector;
     int posicion;
     int columna;
-    // cout << "antes leer programas csv" << endl;
+
     codigosSnies = CsvReaderObj.leerProgramasCsv(rutaProgramasCSV);
-    // cout << "despues leer programas csv" << endl;
+
     programasAcademicosVector = gestorCsvObj.leerArchivoPrimera(rutaAdmitidos, ano1, codigosSnies);
-    // cout << "despues leer archivos Primera" << endl;
+
     etiquetasColumnas = programasAcademicosVector[0];
 
     for (int i = 1; i < programasAcademicosVector.size(); i += 4)
@@ -199,7 +199,7 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
             for (int m = 0; m < 4; ++m)
             {
                 Consolidado *consolidado = programa->getConsolidado(m);
-                consolidado->setMatriculados(stoi(programasAcademicosVector[k + m][1]));
+                consolidado->setMatriculados(stoi(prozgramasAcademicosVector[k + m][1]));
             }
         }
     }

@@ -30,7 +30,7 @@ public:
     vector<vector<string>> leerArchivo(string &rutaBase, string &ano, vector<int> &codigosSnies, int colmunaCodigoSnies);
     vector<vector<string>> leerArchivoPrimera(string &rutaBase, string &ano, vector<int> &codigosSnies);
     vector<vector<string>> leerArchivoSegunda(string &rutaBase, string &ano, vector<int> &codigosSnies);
-    // vector<map<string, string>> leerArchivoFlexible(string &rutaBase, string &ano);
+    vector<map<string, string>> leerArchivoFlexible(string &rutaBase, string &ano);
 };
 
 #endif
