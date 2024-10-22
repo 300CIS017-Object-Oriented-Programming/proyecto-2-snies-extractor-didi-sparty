@@ -15,7 +15,7 @@ using namespace std;
 #include "../ProgramaAcademico.h"
 #include "../Consolidado.h"
 #include "../Settings.h"
-#include "../../include/rapidcsv/rapidcsv.h"
+#include "../../include/rapidcsv/src/rapidcsv.h"
 
 using namespace rapidcsv;
 using namespace std;
