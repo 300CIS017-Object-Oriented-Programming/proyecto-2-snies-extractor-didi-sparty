@@ -20,6 +20,7 @@
 #define SETTINGS_H
 
 #include <string>
+#include <iostream>
 #include <filesystem>
 
 namespace fs = std::filesystem;
@@ -44,4 +45,4 @@ public:
 };
 
 
-#endif // SETTINGS_H
+#endif // 

@@ -28,9 +28,9 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
     vector<vector<string>> programasAcademicosVector;
     int posicion;
     int columna;
-    // cout << "antes leer programas csv" << endl;
-    codigosSnies = gestorCsvObj.leerProgramasCsv(rutaProgramasCSV);
-    // cout << "despues leer programas csv" << endl;
+    codigosSnies = gestorCsvObj.leerProgramasCsv(rutaProgramasCSV);  // Hasta el momento esta función está bien
+
+    // Se supone que desde aquí tenemos que modificar el código
     
 
     programasAcademicosVector = gestorCsvObj.leerArchivoPrimera(rutaAdmitidos, ano1, codigosSnies);
