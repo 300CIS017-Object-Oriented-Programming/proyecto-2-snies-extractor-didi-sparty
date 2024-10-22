@@ -2,9 +2,9 @@
 
 using namespace std;
 
-SNIESController::SNIESController( string &nuevaRutaAdmitidos, string &nuevaRutaGraduados, string &nuevaRutaInscritos, string &nuevaRutaMatriculadosc, string &nuevaRutaMatriculadosPrimerSemestre, string &nuevaRutaOutput)
+SNIESController::SNIESController()
 {
-    gestorCsvObj = GestorCsv();
+    CsvReaderObj = ();
     rutaAdmitidos = nuevaRutaAdmitidos;
     rutaGraduados = nuevaRutaGraduados;
     rutaInscritos = nuevaRutaInscritos;
