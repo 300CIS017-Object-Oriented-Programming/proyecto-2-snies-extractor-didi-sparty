@@ -15,22 +15,23 @@ using namespace std;
 #include "../ProgramaAcademico.h"
 #include "../Consolidado.h"
 #include "../Settings.h"
+#include "../../include/rapidcsv/src/rapidcsv.h"
 
+using namespace rapidcsv;
+using namespace std;
 
 class CsvReader {
 public:
     CsvReader() = default;
-    /*
-     * @brief Lee el archivo programas.csv y busca los codigos SNIES que hay que filtrar
-     * @return Devuelve un vector<int> con los codigos SNIES
-     */
-    //FIXME: actualmente tiene parametros pero hay que quitarselos y reemplazarlo por #include settings
-    vector<int> leerProgramasCsv();
 
-    vector<vector<string>> leerArchivo(string &rutaBase, string &ano, vector<int> &codigosSnies, int colmunaCodigoSnies);
-    vector<vector<string>> leerArchivoPrimera(string &rutaBase, string &ano, vector<int> &codigosSnies);
-    vector<vector<string>> leerArchivoSegunda(string &rutaBase, string &ano, vector<int> &codigosSnies);
-    vector<map<string, string>> leerArchivoFlexible(string &rutaBase, string &ano);
+    vector<string> leerProgramasCsv();
+    /*
+    * inputs el nombre completo del archivo Ej: admitidos2021.csv y un vector con todos los codigos SNIES que esta filtrando
+    * outputs un maopa con llavves los codigos SNIES y valor otro mapa con llaves el nombre de cada columna y valores los datos
+    */
+    map<string, vector<vector<string>>> leerArchivo(string &nombreArchivo, vector<string> &codigosSnies); 
+    int findPos(string&, vector<string>&);
+    
 };
 
 #endif
