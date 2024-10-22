@@ -4,13 +4,10 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "Consolidado.h"
 
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
-using std::vector;
+using namespace std;
 
 class ProgramaAcademico
 {
@@ -52,6 +49,7 @@ class ProgramaAcademico
 
 public:
     ProgramaAcademico();
+    ProgramaAcademico(vector<vector<string>>&, vector<string>&);  //  pasamos un vector con todos los encabezados 
     ~ProgramaAcademico();
 
     void setCodigoDeLaInstitucion(int);
@@ -158,6 +156,7 @@ public:
     void setConsolidado(Consolidado *, int);
 
     Consolidado *getConsolidado(int);
+    int findPos(const string &busqueda, vector<string> &vec);
 };
 
 #endif

@@ -18,6 +18,7 @@ using namespace std;
 #include "../../include/rapidcsv/src/rapidcsv.h"
 
 using namespace rapidcsv;
+using namespace std;
 
 class CsvReader {
 public:
@@ -28,8 +29,9 @@ public:
     * inputs el nombre completo del archivo Ej: admitidos2021.csv y un vector con todos los codigos SNIES que esta filtrando
     * outputs un maopa con llavves los codigos SNIES y valor otro mapa con llaves el nombre de cada columna y valores los datos
     */
-    map<string, map<string, string>> leerArchivo(string &nombreArchivo, vector<string> &codigosSnies); 
+    map<string, vector<vector<string>>> leerArchivo(string &nombreArchivo, vector<string> &codigosSnies); 
     int findPos(string&, vector<string>&)
+    
 };
 
 #endif
