@@ -34,6 +34,7 @@ public:
     void procesarDatosCsv(string &, string &);
     void calcularDatosExtra(bool);
     void buscarProgramas(bool, string &, int);
+    
 };
 
 #endif

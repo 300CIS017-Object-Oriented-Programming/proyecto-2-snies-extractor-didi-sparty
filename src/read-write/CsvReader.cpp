@@ -42,7 +42,7 @@ vector<string> CsvReader::leerProgramasCsv()
     return codigosSniesRetorno;
 }
 
-map<string, map<string, string>> CsvReader::leerArchivo(string &nombreArchivo, vector<string> &codigosSnies){
+map<vector<vector<string>>> CsvReader::leerArchivo(string &nombreArchivo, vector<string> &codigosSnies){  // Saca los encabezados
 
     string ruta = Settings::INPUT_PATH.string() + nombreArchivo;
     Document archivo(ruta, LabelParams(0, 0), SeparatorParams(';'));  // Se crea un objeto tipo rapid csv
@@ -56,26 +56,5 @@ map<string, map<string, string>> CsvReader::leerArchivo(string &nombreArchivo, v
         res[*it] = auxMap;
     }
     
-
-
-
-
-
-
-    
     return res;
-}
-
-int CsvReader::findPos(string &busqueda , vector<string> &vec){
-    int out = 0;
-
-
-    vector<string>::iterator found = find(vec.begin(), vec.end(), busqueda);
-    if (found == vec.end()) {
-        throw invalid_argument("Columna solicitada como filtro incorrecta");
-    }else {
-        out = distance(vec.begin(), found);
-    }
-    
-    return out;
 }
