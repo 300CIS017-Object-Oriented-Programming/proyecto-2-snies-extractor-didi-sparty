@@ -15,7 +15,7 @@ using namespace std;
 #include "../ProgramaAcademico.h"
 #include "../Consolidado.h"
 #include "../Settings.h"
-#include "../../include/rapidcsv/src/rapidcsv.h"
+#include "../../include/rapidcsv.h"
 
 using namespace rapidcsv;
 using namespace std;
@@ -30,7 +30,7 @@ public:
     * outputs un maopa con llavves los codigos SNIES y valor otro mapa con llaves el nombre de cada columna y valores los datos
     */
     map<string, vector<vector<string>>> leerArchivo(string &nombreArchivo, vector<string> &codigosSnies); 
-    int findPos(string&, vector<string>&)
+    int findPos(string&, vector<string>&);
     
 };
 

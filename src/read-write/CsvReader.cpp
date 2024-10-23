@@ -1,5 +1,14 @@
 #include "CsvReader.h"
 
+vector<string> returnFila(map<string, vector<string>> &data, vector<string> &orden, int pos) {
+    vector<string> out;
+
+    for (const auto &key : orden) {
+        out.push_back(data[key][pos]);
+    }
+
+    return out;
+}
 
 
 vector<string> CsvReader::leerProgramasCsv()
@@ -42,19 +51,39 @@ vector<string> CsvReader::leerProgramasCsv()
     return codigosSniesRetorno;
 }
 
-map<vector<vector<string>>> CsvReader::leerArchivo(string &nombreArchivo, vector<string> &codigosSnies){  // Saca los encabezados
+map<string, vector<vector<string>>> leerArchivo(string &nombreArchivo, vector<string> &codigosSnies) {
 
-    string ruta = Settings::INPUT_PATH.string() + nombreArchivo;
-    Document archivo(ruta, LabelParams(0, 0), SeparatorParams(';'));  // Se crea un objeto tipo rapid csv
-    
-    map<string, string> auxMap;
-    map<string, map<string, string>> res;
+    map<string, vector<vector<string>>> out;
 
-    vector<string> headers = archivo.GetColumnNames();
+    Document doc(nombreArchivo, LabelParams(0,0),SeparatorParams(';'));
 
-    for(vector<string>::iterator it = codigosSnies.begin(); it != codigosSnies.end(); it++){
-        res[*it] = auxMap;
+
+
+
+    vector<string> columnaCodigos = doc.GetColumn<string>("CÓDIGO SNIES DEL PROGRAMA");
+    vector<string> header = doc.GetColumnNames();
+
+
+    map<string, vector<string>> tabla;
+    for (const auto &c : header) {
+        tabla[c] = doc.GetColumn<string>(c);
     }
-    
-    return res;
+    int i = 0;
+    for (const auto &codeCsv : columnaCodigos) {
+        for (const auto &codeSearch : codigosSnies) {
+            if (codeCsv == codeSearch) {
+                if (out.find(codeCsv) != out.end()) {
+                    out[codeCsv].push_back(returnFila(tabla, header, i));
+                }else {
+                    vector<vector<string>> aux;
+                    aux.push_back(returnFila(tabla, header, i));
+                    out[codeCsv] = aux;
+                }
+
+            }
+            i++;
+        }
+    }
+
+    return out;
 }
