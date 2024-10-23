@@ -16,9 +16,9 @@ bool CsvWriter::crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapade
         // Imprimimos en el archivo las etiquetas (Primera fila)
         for (int i = 0; i < etiquetasColumnas.size(); i++)
         {
-            archivoResultados << etiquetasColumnas[i] << ";";
+            archivoResultados << etiquetasColumnas[i] << Settings::DELIMITADOR;
         }
-        archivoResultados << "GRADUADOS;INSCRITOS;MATRICULADOS;NEOS" << endl;
+        archivoResultados << "GRADUADOS" << Settings::DELIMITADOR <<"INSCRITOS" << Settings::DELIMITADOR <<"MATRICULADOS" << Settings::DELIMITADOR << "NEOS" << endl;
 
         map<int, ProgramaAcademico *>::iterator it;
         // Leemos todos los programas del mapa para imprimirlos en el archivo
@@ -28,51 +28,51 @@ bool CsvWriter::crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapade
             for (int i = 0; i < 8; i++)
             {
                 // Imprimimos toda la información base del programa academico
-                archivoResultados << (it->second)->getCodigoDeLaInstitucion() << ";";
-                archivoResultados << (it->second)->getIesPadre() << ";";
-                archivoResultados << (it->second)->getInstitucionDeEducacionSuperiorIes() << ";";
-                archivoResultados << (it->second)->getPrincipalOSeccional() << ";";
-                archivoResultados << (it->second)->getIdSectorIes() << ";";
-                archivoResultados << (it->second)->getSectorIes() << ";";
-                archivoResultados << (it->second)->getIdCaracter() << ";";
-                archivoResultados << (it->second)->getCaracterIes() << ";";
-                archivoResultados << (it->second)->getCodigoDelDepartamentoIes() << ";";
-                archivoResultados << (it->second)->getDepartamentoDeDomicilioDeLaIes() << ";";
-                archivoResultados << (it->second)->getCodigoDelMunicipioIes() << ";";
-                archivoResultados << (it->second)->getMunicipioDeDomicilioDeLaIes() << ";";
-                archivoResultados << (it->second)->getCodigoSniesDelPrograma() << ";";
-                archivoResultados << (it->second)->getProgramaAcademico() << ";";
-                archivoResultados << (it->second)->getIdNivelAcademico() << ";";
-                archivoResultados << (it->second)->getNivelAcademico() << ";";
-                archivoResultados << (it->second)->getIdNivelDeFormacion() << ";";
-                archivoResultados << (it->second)->getNivelDeFormacion() << ";";
-                archivoResultados << (it->second)->getIdMetodologia() << ";";
-                archivoResultados << (it->second)->getMetodologia() << ";";
-                archivoResultados << (it->second)->getIdArea() << ";";
-                archivoResultados << (it->second)->getAreaDeConocimiento() << ";";
-                archivoResultados << (it->second)->getIdNucleo() << ";";
-                archivoResultados << (it->second)->getNucleoBasicoDelConocimientoNbc() << ";";
-                archivoResultados << (it->second)->getIdCineCampoAmplio() << ";";
-                archivoResultados << (it->second)->getDescCineCampoAmplio() << ";";
-                archivoResultados << (it->second)->getIdCineCampoEspecifico() << ";";
-                archivoResultados << (it->second)->getDescCineCampoEspecifico() << ";";
-                archivoResultados << (it->second)->getIdCineCodigoDetallado() << ";";
-                archivoResultados << (it->second)->getDescCineCodigoDetallado() << ";";
-                archivoResultados << (it->second)->getCodigoDelDepartamentoPrograma() << ";";
-                archivoResultados << (it->second)->getDepartamentoDeOfertaDelPrograma() << ";";
-                archivoResultados << (it->second)->getCodigoDelMunicipioPrograma() << ";";
-                archivoResultados << (it->second)->getMunicipioDeOfertaDelPrograma() << ";";
+                archivoResultados << (it->second)->getCodigoDeLaInstitucion() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIesPadre() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getInstitucionDeEducacionSuperiorIes() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getPrincipalOSeccional() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdSectorIes() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getSectorIes() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdCaracter() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getCaracterIes() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getCodigoDelDepartamentoIes() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getDepartamentoDeDomicilioDeLaIes() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getCodigoDelMunicipioIes() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getMunicipioDeDomicilioDeLaIes() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getCodigoSniesDelPrograma() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getProgramaAcademico() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdNivelAcademico() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getNivelAcademico() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdNivelDeFormacion() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getNivelDeFormacion() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdMetodologia() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getMetodologia() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdArea() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getAreaDeConocimiento() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdNucleo() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getNucleoBasicoDelConocimientoNbc() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdCineCampoAmplio() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getDescCineCampoAmplio() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdCineCampoEspecifico() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getDescCineCampoEspecifico() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getIdCineCodigoDetallado() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getDescCineCodigoDetallado() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getCodigoDelDepartamentoPrograma() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getDepartamentoDeOfertaDelPrograma() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getCodigoDelMunicipioPrograma() << Settings::DELIMITADOR;
+                archivoResultados << (it->second)->getMunicipioDeOfertaDelPrograma() << Settings::DELIMITADOR;
 
                 // Imprimimos la información del consolidado: (ID SEXO;SEXO;AÑO;SEMESTRE;ADMITIDOS;GRADUADOS;INSCRITOS;MATRICULADOS;NEOS)
                 Consolidado *consolidadoActual = (it->second)->getConsolidado(i);
-                archivoResultados << consolidadoActual->getIdSexo() << ";";
-                archivoResultados << consolidadoActual->getSexo() << ";";
-                archivoResultados << consolidadoActual->getAno() << ";";
-                archivoResultados << consolidadoActual->getSemestre() << ";";
-                archivoResultados << consolidadoActual->getAdmitidos() << ";";
-                archivoResultados << consolidadoActual->getGraduados() << ";";
-                archivoResultados << consolidadoActual->getInscritos() << ";";
-                archivoResultados << consolidadoActual->getMatriculados() << ";";
+                archivoResultados << consolidadoActual->getIdSexo() << Settings::DELIMITADOR;
+                archivoResultados << consolidadoActual->getSexo() << Settings::DELIMITADOR;
+                archivoResultados << consolidadoActual->getAno() << Settings::DELIMITADOR;
+                archivoResultados << consolidadoActual->getSemestre() << Settings::DELIMITADOR;
+                archivoResultados << consolidadoActual->getAdmitidos() << Settings::DELIMITADOR;
+                archivoResultados << consolidadoActual->getGraduados() << Settings::DELIMITADOR;
+                archivoResultados << consolidadoActual->getInscritos() << Settings::DELIMITADOR;
+                archivoResultados << consolidadoActual->getMatriculados() << Settings::DELIMITADOR;
                 archivoResultados << consolidadoActual->getMatriculadosPrimerSemestre();
                 // Saltamos de linea para la siguiente fila
                 archivoResultados << endl;
@@ -101,9 +101,9 @@ bool CsvWriter::crearArchivoBuscados(string &ruta, list<ProgramaAcademico *> &pr
         // Imprimimos en el archivo las etiquetas (Primera fila)
         for (int i = 0; i < etiquetasColumnas.size(); i++)
         {
-            archivoBuscados << etiquetasColumnas[i] << ";";
+            archivoBuscados << etiquetasColumnas[i] << Settings::DELIMITADOR;
         }
-        archivoBuscados << "GRADUADOS;INSCRITOS;MATRICULADOS;NEOS" << endl;
+        archivoBuscados << "GRADUADOS" << Settings::DELIMITADOR << "INSCRITOS" << Settings::DELIMITADOR << "MATRICULADOS" << Settings::DELIMITADOR << "NEOS" << Settings::DELIMITADOR << endl;
 
         list<ProgramaAcademico *>::iterator it;
         // Leemos todos los programas de la lista de los programas buscados para imprimirlos
@@ -113,52 +113,53 @@ bool CsvWriter::crearArchivoBuscados(string &ruta, list<ProgramaAcademico *> &pr
             for (int i = 0; i < 8; i++)
             {
                 // Imprimimos la informacion base del programa
-                archivoBuscados << (*it)->getCodigoDeLaInstitucion() << ";";
-                archivoBuscados << (*it)->getIesPadre() << ";";
-                archivoBuscados << (*it)->getInstitucionDeEducacionSuperiorIes() << ";";
-                archivoBuscados << (*it)->getPrincipalOSeccional() << ";";
-                archivoBuscados << (*it)->getIdSectorIes() << ";";
-                archivoBuscados << (*it)->getSectorIes() << ";";
-                archivoBuscados << (*it)->getIdCaracter() << ";";
-                archivoBuscados << (*it)->getCaracterIes() << ";";
-                archivoBuscados << (*it)->getCodigoDelDepartamentoIes() << ";";
-                archivoBuscados << (*it)->getDepartamentoDeDomicilioDeLaIes() << ";";
-                archivoBuscados << (*it)->getCodigoDelMunicipioIes() << ";";
-                archivoBuscados << (*it)->getMunicipioDeDomicilioDeLaIes() << ";";
-                archivoBuscados << (*it)->getCodigoSniesDelPrograma() << ";";
-                archivoBuscados << (*it)->getProgramaAcademico() << ";";
-                archivoBuscados << (*it)->getIdNivelAcademico() << ";";
-                archivoBuscados << (*it)->getNivelAcademico() << ";";
-                archivoBuscados << (*it)->getIdNivelDeFormacion() << ";";
-                archivoBuscados << (*it)->getNivelDeFormacion() << ";";
-                archivoBuscados << (*it)->getIdMetodologia() << ";";
-                archivoBuscados << (*it)->getMetodologia() << ";";
-                archivoBuscados << (*it)->getIdArea() << ";";
-                archivoBuscados << (*it)->getAreaDeConocimiento() << ";";
-                archivoBuscados << (*it)->getIdNucleo() << ";";
-                archivoBuscados << (*it)->getNucleoBasicoDelConocimientoNbc() << ";";
-                archivoBuscados << (*it)->getIdCineCampoAmplio() << ";";
-                archivoBuscados << (*it)->getDescCineCampoAmplio() << ";";
-                archivoBuscados << (*it)->getIdCineCampoEspecifico() << ";";
-                archivoBuscados << (*it)->getDescCineCampoEspecifico() << ";";
-                archivoBuscados << (*it)->getIdCineCodigoDetallado() << ";";
-                archivoBuscados << (*it)->getDescCineCodigoDetallado() << ";";
-                archivoBuscados << (*it)->getCodigoDelDepartamentoPrograma() << ";";
-                archivoBuscados << (*it)->getDepartamentoDeOfertaDelPrograma() << ";";
-                archivoBuscados << (*it)->getCodigoDelMunicipioPrograma() << ";";
-                archivoBuscados << (*it)->getMunicipioDeOfertaDelPrograma() << ";";
+                archivoBuscados << (*it)->getCodigoDeLaInstitucion() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIesPadre() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getInstitucionDeEducacionSuperiorIes() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getPrincipalOSeccional() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdSectorIes() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getSectorIes() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdCaracter() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getCaracterIes() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getCodigoDelDepartamentoIes() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getDepartamentoDeDomicilioDeLaIes() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getCodigoDelMunicipioIes() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getMunicipioDeDomicilioDeLaIes() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getCodigoSniesDelPrograma() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getProgramaAcademico() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdNivelAcademico() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getNivelAcademico() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdNivelDeFormacion() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getNivelDeFormacion() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdMetodologia() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getMetodologia() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdArea() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getAreaDeConocimiento() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdNucleo() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getNucleoBasicoDelConocimientoNbc() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdCineCampoAmplio() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getDescCineCampoAmplio() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdCineCampoEspecifico() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getDescCineCampoEspecifico() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getIdCineCodigoDetallado() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getDescCineCodigoDetallado() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getCodigoDelDepartamentoPrograma() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getDepartamentoDeOfertaDelPrograma() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getCodigoDelMunicipioPrograma() << Settings::DELIMITADOR;
+                archivoBuscados << (*it)->getMunicipioDeOfertaDelPrograma() << Settings::DELIMITADOR;
 
                 // Imprimimos la información del consolidado: (ID SEXO;SEXO;AÑO;SEMESTRE;ADMITIDOS;GRADUADOS;INSCRITOS;MATRICULADOS;NEOS)
                 Consolidado *consolidadoActual = (*it)->getConsolidado(i);
-                archivoBuscados << consolidadoActual->getIdSexo() << ";";
-                archivoBuscados << consolidadoActual->getSexo() << ";";
-                archivoBuscados << consolidadoActual->getAno() << ";";
-                archivoBuscados << consolidadoActual->getSemestre() << ";";
-                archivoBuscados << consolidadoActual->getAdmitidos() << ";";
-                archivoBuscados << consolidadoActual->getGraduados() << ";";
-                archivoBuscados << consolidadoActual->getInscritos() << ";";
-                archivoBuscados << consolidadoActual->getMatriculados() << ";";
+                archivoBuscados << consolidadoActual->getIdSexo() << Settings::DELIMITADOR;
+                archivoBuscados << consolidadoActual->getSexo() << Settings::DELIMITADOR;
+                archivoBuscados << consolidadoActual->getAno() << Settings::DELIMITADOR;
+                archivoBuscados << consolidadoActual->getSemestre() << Settings::DELIMITADOR;
+                archivoBuscados << consolidadoActual->getAdmitidos() << Settings::DELIMITADOR;
+                archivoBuscados << consolidadoActual->getGraduados() << Settings::DELIMITADOR;
+                archivoBuscados << consolidadoActual->getInscritos() << Settings::DELIMITADOR;
+                archivoBuscados << consolidadoActual->getMatriculados() << Settings::DELIMITADOR;
                 archivoBuscados << consolidadoActual->getMatriculadosPrimerSemestre();
+            
                 // Saltamos de linea para la siguiente fila
                 archivoBuscados << endl;
             }
@@ -188,11 +189,11 @@ bool CsvWriter::crearArchivoExtra(string &ruta, vector<vector<string>> datosAImp
             // Imprimimos cada fila
             for (int j = 0; j < datosAImprimir[i].size(); j++)
             {
-                // Imprimimos cada dato separado por ';'
+                // Imprimimos cada dato separado por el delimitador
                 archivoExtra << datosAImprimir[i][j];
                 if (j != (datosAImprimir[i].size() - 1))
                 {
-                    archivoExtra << ";";
+                    archivoExtra << Settings::DELIMITADOR;
                 }
             }
             // Saltamos de linea al terminar una fila
