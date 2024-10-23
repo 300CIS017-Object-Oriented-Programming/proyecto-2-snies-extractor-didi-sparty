@@ -34,6 +34,8 @@ public:
     void procesarDatosCsv(string &, string &);
     void calcularDatosExtra(bool);
     void buscarProgramas(bool, string &, int);
+    vector<int>buscarPosiciones(vector<string>&);
+    void consolidados(vector<string>&, vector<vector<string>>&);
     
 };
 

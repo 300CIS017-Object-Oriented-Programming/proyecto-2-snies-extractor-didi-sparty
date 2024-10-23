@@ -25,7 +25,8 @@ SNIESController::~SNIESController()
 void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
 {
     vector<int> codigosSnies;
-    vector<vector<string>> programasAcademicosVector;
+    map<string, vector<vector<string>>> programasAcademicosVector;
+    vector<ProgramaAcademico> programasAcademicos;
     int posicion;
     int columna;
     codigosSnies = gestorCsvObj.leerProgramasCsv(rutaProgramasCSV);  // Hasta el momento esta función está bien
@@ -33,7 +34,10 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
     // Se supone que desde aquí tenemos que modificar el código
     
 
-    programasAcademicosVector = gestorCsvObj.leerArchivoPrimera(rutaAdmitidos, ano1, codigosSnies);
+    programasAcademicosVector = gestorCsvObj.leerArchivo(rutaAdmitidos, codigosSnies);
+    programasAcademicosVector[codigosSnies[0]];
+    
+
 
     etiquetasColumnas = programasAcademicosVector[0];
 
@@ -385,4 +389,43 @@ void SNIESController::calcularDatosExtra(bool flag)
         bool creado;
         creado = gestorCsvObj.crearArchivoExtra(rutaOutput, matrizFinal);
     }
+}
+
+
+void SNIEScontroller::consolidados(vector<string>& headers, vector <vector<string>>& information)
+{
+    vector<int> posiciones = buscarPosiciones(headers);
+
+    // Iterar sobre cada fila del vector de vectores information
+    for (size_t i = 0; i < information.size(); i++) {
+        const vector<string>& fila = information[i];
+        // Crear un objeto de tipo Consolidado
+        Consolidado* consolidado = new Consolidado();
+        // Iterar sobre las posiciones de los datos que necesitamos
+        for (int i = 0; i < posiciones.size(); ++i) {
+            // Dependiendo de la posición, asignar el valor correspondiente al objeto consolidado
+            switch (posiciones[i]) {
+                case 0:
+                    consolidado->setIdSexo(stoi(fila[i]));
+                    break;
+                case 1:
+                    consolidado->setSexo(fila[i]);
+                    break;
+                case 2:
+                    consolidado->setAno(stoi(fila[i]));
+                    break;
+                case 3:
+                    consolidado->setSemestre(stoi(fila[i]));
+                    break;
+                case 4:
+                    consolidado->setAdmitidos(stoi(fila[i]));
+                    break;
+                default:
+                    break;
+            }
+        }
+        // Agregar el objeto consolidado al programa académico correspondiente
+        programasAcademicos[stoi(fila[0])]->setConsolidado(consolidado, stoi(fila[0]));
+    }
+
 }

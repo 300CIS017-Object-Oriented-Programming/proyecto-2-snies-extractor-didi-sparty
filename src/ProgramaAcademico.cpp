@@ -390,19 +390,3 @@ ProgramaAcademico::~ProgramaAcademico()
     }
 }
 
-int ProgramaAcademico::findPos(const string &busqueda, vector<string> &vec)
-{ //  Devuelve la posición del vector
-    int out = 0;
-
-    vector<string>::iterator found = find(vec.begin(), vec.end(), busqueda);
-    if (found == vec.end())
-    {
-        throw invalid_argument("Columna solicitada como filtro incorrecta");
-    }
-    else
-    {
-        out = distance(vec.begin(), found);
-    }
-
-    return out;  // devuelve el indice numérico
-}

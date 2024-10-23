@@ -10,7 +10,7 @@
 using namespace std;
 
 
-   /*
+/*
    * input un string y un vector que contenga ese string
    * output si el string no esta en el vector thhow excepcion invalud argument si lo encuentra el indice de donde esta
    */
