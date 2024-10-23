@@ -16,5 +16,7 @@ add_executable(SNIES_extractor_V2 src/Settings.h src/ProgramaAcademico.h src/Pro
         src/read-write/WriteManager.cpp
         src/read-write/CsvWriter.h
         src/read-write/CsvWriter.cpp
-        src/Settings.cpp)
+        src/Settings.cpp
+        src/Utility.h
+        src/Utility.cpp)
 

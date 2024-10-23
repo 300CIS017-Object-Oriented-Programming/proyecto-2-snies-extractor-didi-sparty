@@ -1,14 +1,6 @@
 #include "CsvReader.h"
 
-vector<string> returnFila(map<string, vector<string>> &data, vector<string> &orden, int pos) {
-    vector<string> out;
 
-    for (const auto &key : orden) {
-        out.push_back(data[key][pos]);
-    }
-
-    return out;
-}
 
 
 vector<string> CsvReader::leerProgramasCsv()

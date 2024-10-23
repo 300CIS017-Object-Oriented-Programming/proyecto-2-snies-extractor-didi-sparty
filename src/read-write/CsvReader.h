@@ -16,6 +16,7 @@ using namespace std;
 #include "../Consolidado.h"
 #include "../Settings.h"
 #include "../../include/rapidcsv.h"
+#include "../Utility.h"
 
 using namespace rapidcsv;
 using namespace std;
@@ -29,8 +30,7 @@ public:
     * inputs el nombre completo del archivo Ej: admitidos2021.csv y un vector con todos los codigos SNIES que esta filtrando
     * outputs un maopa con llavves los codigos SNIES y valor otro mapa con llaves el nombre de cada columna y valores los datos
     */
-    map<string, vector<vector<string>>> leerArchivo(string &nombreArchivo, vector<string> &codigosSnies); 
-    int findPos(string&, vector<string>&);
+    map<string, vector<vector<string>>> leerArchivo(string &nombreArchivo, vector<string> &codigosSnies);
     
 };
 
