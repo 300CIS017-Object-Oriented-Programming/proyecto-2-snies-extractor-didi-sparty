@@ -1,7 +1,6 @@
 #ifndef UTILITY_H
 #define UTILITY_H
-#include "ProgramaAcademico.h"
-#include "SNIEScontroller.h"
+
 #include <vector>
 #include <string>
 #include <algorithm>
