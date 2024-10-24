@@ -16,6 +16,11 @@ bool JsonWriter::crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapad
     return estadoCreacion;
 }
 
+bool JsonWriter::crearArchivoBuscados(string &ruta, list<ProgramaAcademico *> &programasBuscados, vector<string> etiquetasColumnas) {
+    return true;
+}
+
+
 bool JsonWriter::crearArchivoExtra(string &ruta, vector<vector<string>> datosAImprimir) {
     bool estadoCreacion = false;
     string rutaCompleta = ruta + "resultados_extra.json";
