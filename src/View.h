@@ -14,12 +14,15 @@ private:
 public:
     View();
     ~View();
+    char obtenerEntradaUsuario(const string &mensaje, const string &opcionesValidas);
     bool mostrarPantallaBienvenido();
     void mostrarDatosExtra();
     void buscarPorPalabraClaveYFormacion();
     void salir();
     bool isConvetibleToInt(const string &);
     void tipoDeSalida();
+    string obtenerAnoValido(const string &mensaje);
+    void intercambiarAnos(string &ano1, string &ano2);
 };
 
 #endif
