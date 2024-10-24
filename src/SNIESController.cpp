@@ -2,20 +2,20 @@
 
 using namespace std;
 
+int findRightRow(int columnaUno, int columnaDos, string &valueColumnaUno, string &valueColumnaDos, vector<vector<string>> &data)
+{
 
-int findRightRow(int columnaUno, int columnaDos, string &valueColumnaUno, string &valueColumnaDos, vector<vector<string>> &data) {
-    
     int out = 0, i = 0;
-    for (const auto &fila : data) {
-        if (fila[columnaUno] == valueColumnaUno && fila[columnaDos] == valueColumnaDos) {
+    for (const auto &fila : data)
+    {
+        if (fila[columnaUno] == valueColumnaUno && fila[columnaDos] == valueColumnaDos)
+        {
             out = i;
         }
         i++;
     }
     return out;
-
 }
-
 
 SNIESController::SNIESController() {}
 
@@ -28,136 +28,87 @@ SNIESController::~SNIESController()
     }
 }
 
-void SNIESController::procesarDatosCsv(string &ano1, string &ano2) {
+void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
+{
     vector<string> codigosSnies = CsvReaderObj.leerProgramasCsv();
     string admitidos = "admitidos" + ano1 + ".csv";
     string graduados = "graduados" + ano1 + ".csv";
     string inscritos = "inscritos" + ano1 + ".csv";
+    string matriculados = "matriculados" + ano1 + ".csv";
+    string admitidos2 = "admitidos" + ano2 + ".csv";
+    string graduados2 = "graduados" + ano2 + ".csv";
+    string inscritos2 = "inscritos" + ano2 + ".csv";
+    string matriculados2 = "matriculados" + ano2 + ".csv";
     map<string, vector<vector<string>>> mapaAdmitidos = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
-    map<string, vector<vector<string>>> mapaGraduados = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
-    map<string, vector<vector<string>>> mapaInscritos = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
-    string admitidos = "admitidos" + ano2 + ".csv";
-    string graduados = "graduados" + ano2 + ".csv";
-    string inscritos = "inscritos" + ano2 + ".csv";
-    map<string, vector<vector<string>>> mapaAdmitidos2 = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
-    map<string, vector<vector<string>>> mapaGraduados2 = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
-    map<string, vector<vector<string>>> mapaInscritos2 = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
-    
-    
+    map<string, vector<vector<string>>> mapaGraduados = CsvReaderObj.leerArchivo(graduados, codigosSnies);
+    map<string, vector<vector<string>>> mapaInscritos = CsvReaderObj.leerArchivo(inscritos, codigosSnies);
+    map<string, vector<vector<string>>> mapaMatriculados = CsvReaderObj.leerArchivo(matriculados, codigosSnies);
+    map<string, vector<vector<string>>> mapaAdmitidos2 = CsvReaderObj.leerArchivo(admitidos2, codigosSnies);
+    map<string, vector<vector<string>>> mapaGraduados2 = CsvReaderObj.leerArchivo(graduados2, codigosSnies);
+    map<string, vector<vector<string>>> mapaInscritos2 = CsvReaderObj.leerArchivo(inscritos2, codigosSnies);
+    map<string, vector<vector<string>>> mapaMatriculados2 = CsvReaderObj.leerArchivo(matriculados2, codigosSnies);
     vector<ProgramaAcademico> programasAcademicos;
-    int i = 0;
-    for (const auto &codigo : codigosSnies) {
+
+    for (const auto &codigo : codigosSnies){
         programasAcademicos.push_back(ProgramaAcademico(mapaLectura[string], mapaLectura["HEAD"][0]));
-        vector<Consolidado*> consolidados;
+        vector<Consolidado *> consolidados;
         int posColSemestre = findPos(mapaAdmitidos["HEAD"], "SEMESTRE"), posColSexo = findPos(mapaAdmitidos["HEAD"], "ID SEXO");
-        int HombrePrimerSemestre = findRightRow(posColSemestre, posColSexo, '1', '1' ), MujerPrimerSemestre = findRightRow(posColSemestre, posColSexo, '1', '2') 
-        int HombreSegundoSemestre = findRightRow(posColSemestre, posColSexo, '2', '1'), MujerSegundoSemestre = findRightRow(posColSemestre, posColSexo, '2', '2');
-        new Consolidado (
-            1, "Hombre", stoi(ano1), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS",mapaInscritos["HEAD"])]),
-            stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS",mapaAdmitidos["HEAD"])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS",mapaMatriculados["HEAD"])]),
-            stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS",mapaMatriculados["HEAD"])]), stoi(maoaGraduados[codigo][HombrePrimerSemestre][findPos("GRADUADOS",mapaGraduados["HEAD"])])
-        );
+        int HombrePrimerSemestre = findRightRow(posColSemestre, posColSexo, '1', '1'), MujerPrimerSemestre = findRightRow(posColSemestre, posColSexo, '1', '2') int HombreSegundoSemestre = findRightRow(posColSemestre, posColSexo, '2', '1'), MujerSegundoSemestre = findRightRow(posColSemestre, posColSexo, '2', '2');
+        Consolidado* HombresPrimerSemestreConsolidadoAno1 = new Consolidado(
+            1, "Hombre", stoi(ano1), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"])]),
+            stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"])]),
+            stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"])]), stoi(mapaGraduados[codigo][HombrePrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"])]));
 
-        new Consolidado (
-            1, "Hombre", stoi(ano2), 2, stoi(mapaInscritos2[codigo][HombreSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"])]),
-            stoi(mapaAdmitidos2[codigo][HombreSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"])]), stoi(mapaMatriculados2[codigo])
+        Consolidado* HombresSegundoSemestreConsolidadoAno1 = new Consolidado(
+            1, "Hombre", stoi(ano1), 2, stoi(mapaInscritos2[codigo][HombreSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"])]),
+            stoi(mapaAdmitidos2[codigo][HombreSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"])]), stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"])]),
+            stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"])]), stoi(mapaGraduados2[codigo][HombreSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"])]);
         )
-        
 
+        Consolidado* MujeresPrimerSemestreConsolidadoAno1 = new Consolidado(
+            2, "Mujer", stoi(ano1), 1, stoi(mapaInscritos[codigo][MujerPrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"])]),
+            stoi(mapaAdmitidos[codigo][MujerPrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"])]), stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"])]),
+            stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"])]), stoi(mapaGraduados[codigo][MujerPrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"])]);
+        )
 
-        i++;
+        Consolidado* MujeresSegundoSemestreConsolidadoAno1 = new Consolidado(
+            2, "Mujer", stoi(ano1), 2, stoi(mapaInscritos2[codigo][MujerSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"])]),
+            stoi(mapaAdmitidos2[codigo][MujerSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"])]), stoi(mapaMatriculados2[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"])]),
+            stoi(mapaMatriculados2[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"])]), stoi(mapaGraduados2[codigo][MujerSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"])]);
+        )
+
+        Consolidado* HombresPrimerSemestreConsolidadoAno2 = new Consolidado(
+            1, "Hombre", stoi(ano2), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"])]),
+            stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"])]),
+            stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"])]), stoi(mapaGraduados[codigo][HombrePrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"])]));
+
+        Consolidado* HombresSegundoSemestreConsolidadoAno2 = new Consolidado(
+            1, "Hombre", stoi(ano2), 2, stoi(mapaInscritos2[codigo][HombreSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"])]),
+            stoi(mapaAdmitidos2[codigo][HombreSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"])]), stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"])]),
+            stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"])]), stoi(mapaGraduados2[codigo][HombreSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"])]);
+        )
+
+        Consolidado* MujeresPrimerSemestreConsolidadoAno2 = new Consolidado(
+            2, "Mujer", stoi(ano2), 1, stoi(mapaInscritos[codigo][MujerPrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"])]),
+            stoi(mapaAdmitidos[codigo][MujerPrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"])]), stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"])]),
+            stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"])]), stoi(mapaGraduados[codigo][MujerPrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"])]);
+        )
+
+        Consolidado* MujeresSegundoSemestreConsolidadoAno2 = new Consolidado(
+            2, "Mujer", stoi(ano2), 2, stoi(mapaInscritos2[codigo][MujerSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"])]),
+            stoi(mapaAdmitidos2[codigo][MujerSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"])]), stoi(mapaMatriculados2[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"])]),
+            stoi(mapaMatriculados2[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"])]), stoi(mapaGraduados2[codigo][MujerSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"])]);
+        )
+        consolidados.push_back(HombresPrimerSemestreConsolidadoAno1);
+        consolidados.push_back(HombresSegundoSemestreConsolidadoAno1);
+        consolidados.push_back(MujeresPrimerSemestreConsolidadoAno1);
+        consolidados.push_back(MujeresSegundoSemestreConsolidadoAno1);
+        consolidados.push_back(HombresPrimerSemestreConsolidadoAno2);
+        consolidados.push_back(HombresSegundoSemestreConsolidadoAno2);
+        consolidados.push_back(MujeresPrimerSemestreConsolidadoAno2);
+        consolidados.push_back(MujeresSegundoSemestreConsolidadoAno2);
+        programasAcademicos.setVecConsolidados(consolidados);
     }
-    
-
-        
-
-    
-
-
-
-
-
-    
-
-    
-
-
-    programasAcademicosVector = gestorCsvObj.leerArchivo(rutaInscritos, ano2, codigosSnies, columna);
-
-
-    }
-
-    programasAcademicosVector = gestorCsvObj.leerArchivo(rutaMatriculados, ano1, codigosSnies, 13);
-
-    for (int k = 0; k < programasAcademicosVector.size(); k += 4)
-    {
-        map<int, ProgramaAcademico *>::iterator it = programasAcademicos.find(stoi(programasAcademicosVector[k][0]));
-        if (it != programasAcademicos.end())
-        {
-            ProgramaAcademico *programa = it->second;
-
-            for (int m = 0; m < 4; ++m)
-            {
-                Consolidado *consolidado = programa->getConsolidado(m);
-                consolidado->setMatriculados(stoi(prozgramasAcademicosVector[k + m][1]));
-            }
-        }
-    }
-
-    programasAcademicosVector = gestorCsvObj.leerArchivo(rutaMatriculados, ano2, codigosSnies, 13);
-
-    for (int k = 0; k < programasAcademicosVector.size(); k += 4)
-    {
-        map<int, ProgramaAcademico *>::iterator it = programasAcademicos.find(stoi(programasAcademicosVector[k][0]));
-        if (it != programasAcademicos.end())
-        {
-            ProgramaAcademico *programa = it->second;
-
-            for (int m = 0; m < 4; ++m)
-            {
-                Consolidado *consolidado = programa->getConsolidado(m + 4);
-                consolidado->setMatriculados(stoi(programasAcademicosVector[k + m][1]));
-            }
-        }
-    }
-
-    programasAcademicosVector = gestorCsvObj.leerArchivo(rutaMatriculadosPrimerSemestre, ano1, codigosSnies, 13);
-
-    for (int k = 0; k < programasAcademicosVector.size(); k += 4)
-    {
-        map<int, ProgramaAcademico *>::iterator it = programasAcademicos.find(stoi(programasAcademicosVector[k][0]));
-        if (it != programasAcademicos.end())
-        {
-            ProgramaAcademico *programa = it->second;
-
-            for (int m = 0; m < 4; ++m)
-            {
-                Consolidado *consolidado = programa->getConsolidado(m);
-                consolidado->setMatriculadosPrimerSemestre(stoi(programasAcademicosVector[k + m][1]));
-            }
-        }
-    }
-
-    programasAcademicosVector = gestorCsvObj.leerArchivo(rutaMatriculadosPrimerSemestre, ano2, codigosSnies, 13);
-
-    for (int k = 0; k < programasAcademicosVector.size(); k += 4)
-    {
-        map<int, ProgramaAcademico *>::iterator it = programasAcademicos.find(stoi(programasAcademicosVector[k][0]));
-        if (it != programasAcademicos.end())
-        {
-            ProgramaAcademico *programa = it->second;
-
-            for (int m = 0; m < 4; ++m)
-            {
-                Consolidado *consolidado = programa->getConsolidado(m + 4);
-                consolidado->setMatriculadosPrimerSemestre(stoi(programasAcademicosVector[k + m][1]));
-            }
-        }
-    }
-
-    bool archivoCreado;
-    archivoCreado = csvWriter.crearArchivo(rutaOutput, programasAcademicos, etiquetasColumnas);
-    // cout << archivoCreado << endl;
 }
 
 void SNIESController::buscarProgramas(bool flag, string &palabraClave, int idComparacion)
@@ -291,7 +242,7 @@ void SNIESController::calcularDatosExtra(bool flag)
         if ((SumaNeosPrimerSemestre == 0 && SumaNeosSegundoSemestre == 0 && SumaNeosTercerSemestre == 0) || (SumaNeosSegundoSemestre == 0 && SumaNeosTercerSemestre == 0 && SumaNeosCuartoSemestre == 0))
         {
             etiquetas3 = {to_string(programa->getCodigoSniesDelPrograma()),
-                        programa->getProgramaAcademico()};
+                          programa->getProgramaAcademico()};
         }
     }
     etiquetas1 = {to_string(sumaPrimerAno), to_string(sumaSegundoAno)};
@@ -320,41 +271,42 @@ void SNIESController::calcularDatosExtra(bool flag)
     }
 }
 
-
-void SNIEScontroller::consolidados(vector<string>& headers, vector <vector<string>>& information)
+void SNIEScontroller::consolidados(vector<string> &headers, vector<vector<string>> &information)
 {
     vector<int> posiciones = buscarPosiciones(headers);
 
     // Iterar sobre cada fila del vector de vectores information
-    for (size_t i = 0; i < information.size(); i++) {
-        const vector<string>& fila = information[i];
+    for (size_t i = 0; i < information.size(); i++)
+    {
+        const vector<string> &fila = information[i];
         // Crear un objeto de tipo Consolidado
-        Consolidado* consolidado = new Consolidado();
+        Consolidado *consolidado = new Consolidado();
         // Iterar sobre las posiciones de los datos que necesitamos
-        for (int i = 0; i < posiciones.size(); ++i) {
+        for (int i = 0; i < posiciones.size(); ++i)
+        {
             // Dependiendo de la posición, asignar el valor correspondiente al objeto consolidado
-            switch (posiciones[i]) {
-                case 0:
-                    consolidado->setIdSexo(stoi(fila[i]));
-                    break;
-                case 1:
-                    consolidado->setSexo(fila[i]);
-                    break;
-                case 2:
-                    consolidado->setAno(stoi(fila[i]));
-                    break;
-                case 3:
-                    consolidado->setSemestre(stoi(fila[i]));
-                    break;
-                case 4:
-                    consolidado->setAdmitidos(stoi(fila[i]));
-                    break;
-                default:
-                    break;
+            switch (posiciones[i])
+            {
+            case 0:
+                consolidado->setIdSexo(stoi(fila[i]));
+                break;
+            case 1:
+                consolidado->setSexo(fila[i]);
+                break;
+            case 2:
+                consolidado->setAno(stoi(fila[i]));
+                break;
+            case 3:
+                consolidado->setSemestre(stoi(fila[i]));
+                break;
+            case 4:
+                consolidado->setAdmitidos(stoi(fila[i]));
+                break;
+            default:
+                break;
             }
         }
         // Agregar el objeto consolidado al programa académico correspondiente
         programasAcademicos[stoi(fila[0])]->setConsolidado(consolidado, stoi(fila[0]));
     }
-
 }

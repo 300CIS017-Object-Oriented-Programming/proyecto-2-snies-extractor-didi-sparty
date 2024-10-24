@@ -157,6 +157,8 @@ public:
 
     Consolidado *getConsolidado(int);
     int findPos(const string &busqueda, vector<string> &vec);
+
+    void setVecConsolidados(vector<Consolidado *> &);
 };
 
 #endif

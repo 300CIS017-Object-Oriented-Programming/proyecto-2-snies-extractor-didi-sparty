@@ -391,3 +391,8 @@ ProgramaAcademico::~ProgramaAcademico()
     }
 }
 
+void ProgramaAcademico::setVecConsolidados(vector<Consolidado *> &nuevosConsolidados)
+{
+    consolidados = nuevosConsolidados;
+}
+
