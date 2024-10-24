@@ -9,6 +9,10 @@
 #include "ProgramaAcademico.h"
 #include "Consolidado.h"
 #include "read-write/CsvReader.h"
+#include "read-write/CsvWriter.h"
+#include "read-write/WriteManager.h"
+#include "read-write/JsonWriter.h"
+#include "read-write/TxtWriter.h"
 
 using namespace std;
 

@@ -11,6 +11,7 @@ using namespace std;
 
 class ProgramaAcademico
 {
+    private:
     int codigoDeLaInstitucion;
     int iesPadre;
     string institucionDeEducacionSuperiorIes;

@@ -1,5 +1,7 @@
 #include "Utility.h"
 
+#include <stdexcept>
+
 
 int findPos(const string &busqueda, vector<string> &vec)
 {
