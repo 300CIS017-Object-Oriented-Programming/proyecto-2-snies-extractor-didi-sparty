@@ -42,10 +42,9 @@ ProgramaAcademico::ProgramaAcademico(vector<vector<string>>& datos, vector<strin
     setDepartamentoDeOfertaDelPrograma(datos[0][findPos("DEPARTAMENTO DE OFERTA DEL PROGRAMA", headers)]);       // DEPARTAMENTO DE OFERTA DEL PROGRAMA
     setCodigoDelMunicipioPrograma(stoi(datos[0][findPos("CÓDIGO DEL MUNICIPIO (PROGRAMA)", headers)]));          // CÓDIGO DEL MUNICIPIO (PROGRAMA)
     setMunicipioDeOfertaDelPrograma(datos[0][findPos("MUNICIPIO DE OFERTA DEL PROGRAMA", headers)]);             // MUNICIPIO DE OFERTA DEL PROGRAMA
+}
 
-
-    void ProgramaAcademico::setCodigoDeLaInstitucion(int nuevoCodigoDeLaInstitucion)
-{
+    void ProgramaAcademico::setCodigoDeLaInstitucion(int nuevoCodigoDeLaInstitucion) {
     codigoDeLaInstitucion = nuevoCodigoDeLaInstitucion;
 }
 

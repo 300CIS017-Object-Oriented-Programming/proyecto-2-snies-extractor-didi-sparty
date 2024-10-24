@@ -21,6 +21,7 @@ class SNIESController
 
 private:
     map<int, ProgramaAcademico *> programasAcademicos;
+    ProgramaAcademico programasAcademics;
     CsvReader CsvReaderObj;
     CsvWriter csvWriter;
     JsonWriter jsonWriter;

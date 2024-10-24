@@ -17,8 +17,6 @@ int findRightRow(int columnaUno, int columnaDos, const string &valueColumnaUno, 
     return out;
 }
 
-SNIESController::SNIESController() = default;
-
 SNIESController::~SNIESController()
 {
     for (auto &pair : programasAcademicos)
@@ -107,7 +105,7 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
         consolidados.push_back(HombresSegundoSemestreConsolidadoAno2);
         consolidados.push_back(MujeresPrimerSemestreConsolidadoAno2);
         consolidados.push_back(MujeresSegundoSemestreConsolidadoAno2);
-        programasAcademicos.setVecConsolidados(consolidados);
+        programasAcademics.setVecConsolidados(consolidados);
     }
 }
 

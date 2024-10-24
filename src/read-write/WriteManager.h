@@ -9,6 +9,7 @@
 #include <list>
 #include <algorithm>
 #include "../Settings.h"
+#include "../ProgramaAcademico.h"
 
 using namespace std;
 
@@ -16,9 +17,9 @@ class WriteManager{
     public:
         WriteManager();
         ~WriteManager();
-        virtual void newFile(const string&) = 0;
-        virtual bool loadFromFile(const string&) = 0;
-        virtual bool saveToFile(const string&) = 0;
+        virtual bool crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapadeProgramasAcademicos, vector<string> etiquetasColumnas) = 0;
+        virtual bool crearArchivoBuscados(string &ruta, list<ProgramaAcademico *> &programasBuscados, vector<string> etiquetasColumnas) = 0;
+        virtual bool crearArchivoExtra(string &ruta, vector<vector<string>> datosAImprimir);
 };
 
 #endif
