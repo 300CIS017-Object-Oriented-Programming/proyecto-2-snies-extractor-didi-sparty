@@ -4,16 +4,14 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "Consolidado.h"
-
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
-using std::vector;
+#include "Utility.h"
+using namespace std;
 
 class ProgramaAcademico
 {
+    private:
     int codigoDeLaInstitucion;
     int iesPadre;
     string institucionDeEducacionSuperiorIes;
@@ -52,6 +50,7 @@ class ProgramaAcademico
 
 public:
     ProgramaAcademico();
+    ProgramaAcademico(vector<vector<string>>&, vector<string>&);  //  pasamos un vector con todos los encabezados 
     ~ProgramaAcademico();
 
     void setCodigoDeLaInstitucion(int);
@@ -158,6 +157,8 @@ public:
     void setConsolidado(Consolidado *, int);
 
     Consolidado *getConsolidado(int);
+
+    void setVecConsolidados(vector<Consolidado *> &);
 };
 
 #endif
