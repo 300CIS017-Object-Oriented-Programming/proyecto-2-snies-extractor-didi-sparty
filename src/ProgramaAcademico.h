@@ -48,6 +48,7 @@ class ProgramaAcademico
     string municipioDeOfertaDelPrograma;
     vector<Consolidado *> consolidados;
 
+
 public:
     ProgramaAcademico();
     ProgramaAcademico(vector<vector<string>>&, vector<string>&);  //  pasamos un vector con todos los encabezados 
@@ -159,6 +160,7 @@ public:
     Consolidado *getConsolidado(int);
 
     void setVecConsolidados(vector<Consolidado *> &);
+
 };
 
 #endif

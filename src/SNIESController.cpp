@@ -116,7 +116,13 @@ void SNIESController::buscarProgramas(bool flag, string &palabraClave, int idCom
     if (flag)
     {
         bool creado;
-        creado = csvWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
+        // 1 para csv, 2 para txt // 3 para json
+        if(opcionOutput == 1)
+            creado = csvWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
+        else if(opcionOutput == 2)
+            creado = txtWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
+        else if(opcionOutput == 3)
+            cout << "PROXIMAMENTE" << endl;
     }
 }
 
@@ -254,6 +260,18 @@ void SNIESController::calcularDatosExtra(bool flag)
     {
         bool creado;
         creado = csvWriter.crearArchivoExtra(rutaOutput, matrizFinal);
+        // 1 para csv, 2 para txt // 3 para json
+        if(opcionOutput == 1)
+            creado = csvWriter.crearArchivoExtra(rutaOutput, matrizFinal);
+        else if(opcionOutput == 2)
+            creado = txtWriter.crearArchivoExtra(rutaOutput, matrizFinal);
+        else if(opcionOutput == 3)
+            cout << "PROXIMAMENTE" << endl;
     }
 }
+
+void SNIESController::setOpcionOutput(int opcion) {
+    opcionOutput = opcion;
+}
+
 

@@ -55,8 +55,6 @@ bool View::mostrarPantallaBienvenido()
 {
     bool parametrizacionBool = false;
 
-    cout << "Bienvenido al SNIES-Extractor!" << endl;
-    cout << "=========================================" << endl;
     cout << "Recuerde que para el correcto funcionamiento del programa tuvo que haber parametrizado" << endl;
     cout << "antes la carpeta SNIES_EXTRACTOR en el disco duro C:, con sus respectivas carpetas inputs y outputs" << endl;
     cout << "y todos los archivo CSV del SNIES." << endl;
@@ -68,7 +66,7 @@ bool View::mostrarPantallaBienvenido()
         parametrizacionBool = true;
 
         string userText;
-        cout << "A continuacion se procesaran los datos de los programas academicos seleccionados en /programas.csv..." << endl;
+        cout << "A continuacion se procesaran los datos de los programas academicos seleccionados..." << endl;
 
         string anio1 = obtenerAnoValido("Escriba el primer ano de busqueda: ");
         string ano2 = obtenerAnoValido("Escriba el segundo ano de busqueda: ");
@@ -186,37 +184,25 @@ bool View::isConvetibleToInt(const string &str)
 
   //  Menu para preguntar el tipo de salida que el usuario desea la informacion
 void View::tipoDeSalida(){
-    int opcion = 0;
+    cout << "Bienvenido al SNIES-Extractor!" << endl;
+    cout << "=========================================" << endl;
+    int opcion;
     cout << "Desea imprimir la informacion?\n1.Si\n2.No" << endl;
     cin >> opcion;
     switch (opcion)
     {
     case 1:
         cout << "Por favor indique el tipo de archivo que desea para su informacion"
-                "1. CSV FILE\n2. JSON FILE\n3. TXT FILE" << endl;
-        int opcionFile = 0;
+                "\n1. CSV FILE\n2. TXT FILE\n3. JSON FILE" << endl;
+        int opcionFile;
         cin >> opcionFile;
-    //     switch (opcionFile)
-    //     {
-    //     case 1:
-    //         controlador.csvOutput();
-    //         break;
-    //
-    //     case 2:
-    //         controlador.jsonOutput();
-    //         break;
-    //     case 3:
-    //         controlador.txtOutput();
-    //     default:
-    //         cout << "Opcion no valida" << endl;
-    //         break;
-    //     }
-    //     break;
-    // case 2:
-    //     cout << "Entendido, te espero de vuelta !" << endl;
-    //     break;
-    // default:
-    //     cout << "Opcion invalida, por favor verifique de nuevo";
-    //     break;
+        controlador.setOpcionOutput(opcionFile);
+         break;
+    case 2:
+         cout << "Entendido, te espero de vuelta !" << endl;
+         break;
+    default:
+         cout << "Opcion invalida, por favor verifique de nuevo";
+         break;
      }
 }

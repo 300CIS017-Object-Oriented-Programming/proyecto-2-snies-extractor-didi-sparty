@@ -34,6 +34,7 @@ private:
     string rutaMatriculados;
     string rutaMatriculadosPrimerSemestre;
     string rutaOutput;
+    int opcionOutput;
 
 public:
     SNIESController() = default;
@@ -41,7 +42,7 @@ public:
     void procesarDatosCsv(string &, string &);
     void calcularDatosExtra(bool);
     void buscarProgramas(bool, string &, int);
-
+    void setOpcionOutput(int);
     
 };
 
