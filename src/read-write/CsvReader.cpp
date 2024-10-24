@@ -42,7 +42,8 @@ vector<string> CsvReader::leerProgramasCsv() {
     return codigosSniesRetorno;
 }
 
-map<string, vector<vector<string>>> leerArchivo(string &nombreArchivo, vector<string> &codigosSnies) {
+
+map<string, vector<vector<string>>> CsvReader::leerArchivo(string &nombreArchivo, vector<string> &codigosSnies) {
 
     map<string, vector<vector<string>>> out;
     string ruta = Settings::INPUT_PATH.string() + nombreArchivo;

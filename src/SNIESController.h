@@ -38,11 +38,10 @@ private:
 public:
     SNIESController() = default;
     ~SNIESController();
-    int findRightRow(int columna_uno, int columna_dos, char value_columna_uno, char value_columna_dos, const vector<vector<string>>& data);
     void procesarDatosCsv(string &, string &);
     void calcularDatosExtra(bool);
     void buscarProgramas(bool, string &, int);
-    void consolidados(vector<string>&, vector<vector<string>>&);
+
     
 };
 

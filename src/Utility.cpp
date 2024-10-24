@@ -47,3 +47,18 @@ vector<string> returnFila(map<string, vector<string>> &data, vector<string> &ord
 
     return out;
 }
+
+
+int findRightRow(int columnaUno, int columnaDos, const string &valueColumnaUno, const string &valueColumnaDos, vector<vector<string>> &data) {
+
+    int out = 0, i = 0;
+    for (const auto &fila : data)
+    {
+        if (fila[columnaUno] == valueColumnaUno && fila[columnaDos] == valueColumnaDos)
+        {
+            out = i;
+        }
+        i++;
+    }
+    return out;
+}

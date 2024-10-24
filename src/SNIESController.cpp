@@ -2,20 +2,6 @@
 
 using namespace std;
 
-int findRightRow(int columnaUno, int columnaDos, const string &valueColumnaUno, const string &valueColumnaDos, vector<vector<string>> &data)
-{
-
-    int out = 0, i = 0;
-    for (const auto &fila : data)
-    {
-        if (fila[columnaUno] == valueColumnaUno && fila[columnaDos] == valueColumnaDos)
-        {
-            out = i;
-        }
-        i++;
-    }
-    return out;
-}
 
 SNIESController::~SNIESController()
 {
@@ -47,11 +33,12 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
     map<string, vector<vector<string>>> mapaMatriculados2 = CsvReaderObj.leerArchivo(matriculados2, codigosSnies);
 
     int i = 0;
+    string strUno = "1", strDos = "2";
     for (const auto &codigo : codigosSnies){
         ProgramaAcademico* prog = new ProgramaAcademico(mapaAdmitidos[codigo], mapaAdmitidos["HEAD"][0]);
         vector<Consolidado *> consolidados;
         int posColSemestre = findPos("SEMESTRE", mapaAdmitidos["HEAD"][0]), posColSexo = findPos( "ID SEXO", mapaAdmitidos["HEAD"][0]);
-        int HombrePrimerSemestre = findRightRow(posColSemestre, posColSexo, *"1", *"1", mapaAdmitidos[codigo]), MujerPrimerSemestre = findRightRow(posColSemestre, posColSexo, *"1", *"2", mapaAdmitidos[codigo]), HombreSegundoSemestre = findRightRow(posColSemestre, posColSexo, *"2", *"1", mapaAdmitidos[codigo]), MujerSegundoSemestre = findRightRow(posColSemestre, posColSexo, *"2", *"2", mapaAdmitidos[codigo]);
+        int HombrePrimerSemestre = findRightRow(posColSemestre, posColSexo, strUno, strUno, mapaAdmitidos[codigo]), MujerPrimerSemestre = findRightRow(posColSemestre, posColSexo, strUno, strDos, mapaAdmitidos[codigo]), HombreSegundoSemestre = findRightRow(posColSemestre, posColSexo, strDos, strUno, mapaAdmitidos[codigo]), MujerSegundoSemestre = findRightRow(posColSemestre, posColSexo, strDos, strDos, mapaAdmitidos[codigo]);
         Consolidado* HombresPrimerSemestreConsolidadoAno1 = new Consolidado(
             1, "Hombre", stoi(ano1), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
             stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
