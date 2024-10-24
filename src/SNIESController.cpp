@@ -2,16 +2,7 @@
 
 using namespace std;
 
-SNIESController::SNIESController()
-{
-    CsvReaderObj = ();
-    rutaAdmitidos = nuevaRutaAdmitidos;
-    rutaGraduados = nuevaRutaGraduados;
-    rutaInscritos = nuevaRutaInscritos;
-    rutaMatriculados = nuevaRutaMatriculadosc;
-    rutaMatriculadosPrimerSemestre = nuevaRutaMatriculadosPrimerSemestre;
-    rutaOutput = nuevaRutaOutput;
-}
+SNIESController::SNIESController() {}
 
 SNIESController::~SNIESController()
 {
@@ -22,16 +13,19 @@ SNIESController::~SNIESController()
     }
 }
 
-void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
-{
-    vector<int> codigosSnies;
-    map<string, vector<vector<string>>> programasAcademicosVector;
-    vector<ProgramaAcademico> programasAcademicos;
-    int posicion;
-    int columna;
-    codigosSnies = gestorCsvObj.leerProgramasCsv(rutaProgramasCSV);  // Hasta el momento esta función está bien
+void SNIESController::procesarDatosCsv(string &ano1, string &ano2) {
+    vector<string> codigosSnies = CsvReaderObj.leerProgramasCsv();
+    string admitidos = "admitidos" + ano1 + ".csv";
+    string graduados = "graduados" + ano1 + ".csv";
+    string inscritos = "inscritos" + ano1 + ".csv";
+    map<string, vector<vector<string>>> mapaLectura = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
 
-    // Se supone que desde aquí tenemos que modificar el código
+    vector<ProgramaAcademico> programasAcademicos;
+
+
+
+
+
     
 
     programasAcademicosVector = gestorCsvObj.leerArchivo(rutaAdmitidos, codigosSnies);

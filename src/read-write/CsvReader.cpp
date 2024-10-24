@@ -46,8 +46,8 @@ vector<string> CsvReader::leerProgramasCsv()
 map<string, vector<vector<string>>> leerArchivo(string &nombreArchivo, vector<string> &codigosSnies) {
 
     map<string, vector<vector<string>>> out;
-
-    Document doc(nombreArchivo, LabelParams(0,0),SeparatorParams(';'));
+    string ruta = Settings::INPUT_PATH.string() + nombreArchivo;
+    Document doc(ruta, LabelParams(0,0),SeparatorParams(';'));
 
 
 
@@ -55,6 +55,7 @@ map<string, vector<vector<string>>> leerArchivo(string &nombreArchivo, vector<st
     vector<string> columnaCodigos = doc.GetColumn<string>("CÓDIGO SNIES DEL PROGRAMA");
     vector<string> header = doc.GetColumnNames();
 
+    out["HEAD"] = vector<vector<string>>(1, header);
 
     map<string, vector<string>> tabla;
     for (const auto &c : header) {
