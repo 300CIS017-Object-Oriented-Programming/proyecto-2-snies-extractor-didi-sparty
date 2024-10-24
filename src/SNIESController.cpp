@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 SNIESController::~SNIESController()
 {
     for (auto &pair : programasAcademicos)
@@ -14,7 +13,13 @@ SNIESController::~SNIESController()
 
 void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
 {
-    vector<string> codigosSnies = CsvReaderObj.leerProgramasCsv();
+    vector<string> codigosSnies;
+    try{
+        codigosSnies = CsvReaderObj.leerProgramasCsv();
+    } catch (const exception &e) {
+        cerr << "Error al leer programas CSV: " << e.what() << endl;
+    }
+
     string admitidos = "admitidos" + ano1 + ".csv";
     string graduados = "graduados" + ano1 + ".csv";
     string inscritos = "inscritos" + ano1 + ".csv";
@@ -34,66 +39,71 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
 
     int i = 0;
     string strUno = "1", strDos = "2";
-    for (const auto &codigo : codigosSnies){
-        ProgramaAcademico* prog = new ProgramaAcademico(mapaAdmitidos[codigo], mapaAdmitidos["HEAD"][0]);
-        vector<Consolidado *> consolidados;
-        int posColSemestre = findPos("SEMESTRE", mapaAdmitidos["HEAD"][0]), posColSexo = findPos( "ID SEXO", mapaAdmitidos["HEAD"][0]);
-        int HombrePrimerSemestre = findRightRow(posColSemestre, posColSexo, strUno, strUno, mapaAdmitidos[codigo]), MujerPrimerSemestre = findRightRow(posColSemestre, posColSexo, strUno, strDos, mapaAdmitidos[codigo]), HombreSegundoSemestre = findRightRow(posColSemestre, posColSexo, strDos, strUno, mapaAdmitidos[codigo]), MujerSegundoSemestre = findRightRow(posColSemestre, posColSexo, strDos, strDos, mapaAdmitidos[codigo]);
-        Consolidado* HombresPrimerSemestreConsolidadoAno1 = new Consolidado(
-            1, "Hombre", stoi(ano1), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
-            stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
-            stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][HombrePrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
+    for (const auto &codigo : codigosSnies)
+    {
+        try {
+            ProgramaAcademico *prog = new ProgramaAcademico(mapaAdmitidos[codigo], mapaAdmitidos["HEAD"][0]);
+            vector<Consolidado *> consolidados;
+            int posColSemestre = findPos("SEMESTRE", mapaAdmitidos["HEAD"][0]), posColSexo = findPos("ID SEXO", mapaAdmitidos["HEAD"][0]);
+            int HombrePrimerSemestre = findRightRow(posColSemestre, posColSexo, strUno, strUno, mapaAdmitidos[codigo]), MujerPrimerSemestre = findRightRow(posColSemestre, posColSexo, strUno, strDos, mapaAdmitidos[codigo]), HombreSegundoSemestre = findRightRow(posColSemestre, posColSexo, strDos, strUno, mapaAdmitidos[codigo]), MujerSegundoSemestre = findRightRow(posColSemestre, posColSexo, strDos, strDos, mapaAdmitidos[codigo]);
+            Consolidado *HombresPrimerSemestreConsolidadoAno1 = new Consolidado(
+                1, "Hombre", stoi(ano1), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
+                stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
+                stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][HombrePrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
 
-        Consolidado* HombresSegundoSemestreConsolidadoAno1 = new Consolidado(
-            1, "Hombre", stoi(ano1), 2, stoi(mapaInscritos2[codigo][HombreSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"][0])]),
-            stoi(mapaAdmitidos2[codigo][HombreSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"][0])]), stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]),
-            stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]), stoi(mapaGraduados2[codigo][HombreSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"][0])]));
+            Consolidado *HombresSegundoSemestreConsolidadoAno1 = new Consolidado(
+                1, "Hombre", stoi(ano1), 2, stoi(mapaInscritos2[codigo][HombreSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"][0])]),
+                stoi(mapaAdmitidos2[codigo][HombreSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"][0])]), stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]),
+                stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]), stoi(mapaGraduados2[codigo][HombreSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"][0])]));
 
+            Consolidado *MujeresPrimerSemestreConsolidadoAno1 = new Consolidado(
+                2, "Mujer", stoi(ano1), 1, stoi(mapaInscritos[codigo][MujerPrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
+                stoi(mapaAdmitidos[codigo][MujerPrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
+                stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][MujerPrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
 
-        Consolidado* MujeresPrimerSemestreConsolidadoAno1 = new Consolidado(
-            2, "Mujer", stoi(ano1), 1, stoi(mapaInscritos[codigo][MujerPrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
-            stoi(mapaAdmitidos[codigo][MujerPrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
-            stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][MujerPrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
+            Consolidado *MujeresSegundoSemestreConsolidadoAno1 = new Consolidado(
+                2, "Mujer", stoi(ano1), 2, stoi(mapaInscritos2[codigo][MujerSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"][0])]),
+                stoi(mapaAdmitidos2[codigo][MujerSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"][0])]), stoi(mapaMatriculados2[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]),
+                stoi(mapaMatriculados2[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]), stoi(mapaGraduados2[codigo][MujerSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"][0])]));
 
+            Consolidado *HombresPrimerSemestreConsolidadoAno2 = new Consolidado(
+                1, "Hombre", stoi(ano2), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
+                stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
+                stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][HombrePrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
 
-        Consolidado* MujeresSegundoSemestreConsolidadoAno1 = new Consolidado(
-            2, "Mujer", stoi(ano1), 2, stoi(mapaInscritos2[codigo][MujerSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"][0])]),
-            stoi(mapaAdmitidos2[codigo][MujerSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"][0])]), stoi(mapaMatriculados2[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]),
-            stoi(mapaMatriculados2[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]), stoi(mapaGraduados2[codigo][MujerSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"][0])]));
+            Consolidado *HombresSegundoSemestreConsolidadoAno2 = new Consolidado(
+                1, "Hombre", stoi(ano2), 2, stoi(mapaInscritos2[codigo][HombreSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"][0])]),
+                stoi(mapaAdmitidos2[codigo][HombreSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"][0])]), stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]),
+                stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]), stoi(mapaGraduados2[codigo][HombreSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"][0])]));
 
+            Consolidado *MujeresPrimerSemestreConsolidadoAno2 = new Consolidado(
+                2, "Mujer", stoi(ano2), 1, stoi(mapaInscritos[codigo][MujerPrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
+                stoi(mapaAdmitidos[codigo][MujerPrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
+                stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][MujerPrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
 
-        Consolidado* HombresPrimerSemestreConsolidadoAno2 = new Consolidado(
-            1, "Hombre", stoi(ano2), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
-            stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
-            stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][HombrePrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
+            Consolidado *MujeresSegundoSemestreConsolidadoAno2 = new Consolidado(
+                2, "Mujer", stoi(ano2), 2, stoi(mapaInscritos[codigo][MujerSegundoSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
+                stoi(mapaAdmitidos[codigo][MujerSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
+                stoi(mapaMatriculados[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][MujerSegundoSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
 
-        Consolidado* HombresSegundoSemestreConsolidadoAno2 = new Consolidado(
-            1, "Hombre", stoi(ano2), 2, stoi(mapaInscritos2[codigo][HombreSegundoSemestre][findPos("INSCRITOS", mapaInscritos2["HEAD"][0])]),
-            stoi(mapaAdmitidos2[codigo][HombreSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos2["HEAD"][0])]), stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]),
-            stoi(mapaMatriculados2[codigo][HombreSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados2["HEAD"][0])]), stoi(mapaGraduados2[codigo][HombreSegundoSemestre][findPos("GRADUADOS", mapaGraduados2["HEAD"][0])]));
+            consolidados.push_back(HombresPrimerSemestreConsolidadoAno1);
+            consolidados.push_back(HombresSegundoSemestreConsolidadoAno1);
+            consolidados.push_back(MujeresPrimerSemestreConsolidadoAno1);
+            consolidados.push_back(MujeresSegundoSemestreConsolidadoAno1);
+            consolidados.push_back(HombresPrimerSemestreConsolidadoAno2);
+            consolidados.push_back(HombresSegundoSemestreConsolidadoAno2);
+            consolidados.push_back(MujeresPrimerSemestreConsolidadoAno2);
+            consolidados.push_back(MujeresSegundoSemestreConsolidadoAno2);
+            prog->setVecConsolidados(consolidados);
+            programasAcademicos[stoi(codigo)] = prog;
+    } catch (const out_of_range &e) {
+        cerr << "Error: Acceso fuera de rango en los mapas: " << e.what() << endl;
+    } catch (const invalid_argument &e) {
+        cerr << "Error: Conversión inválida de string a int: " << e.what() << endl;
+    } catch (const exception &e) {
+        cerr << "Error inesperado " << e.what() << endl;
+    }
 
-
-        Consolidado* MujeresPrimerSemestreConsolidadoAno2 = new Consolidado(
-            2, "Mujer", stoi(ano2), 1, stoi(mapaInscritos[codigo][MujerPrimerSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
-            stoi(mapaAdmitidos[codigo][MujerPrimerSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
-            stoi(mapaMatriculados[codigo][MujerPrimerSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][MujerPrimerSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
-
-
-        Consolidado* MujeresSegundoSemestreConsolidadoAno2 = new Consolidado(
-        2, "Mujer", stoi(ano2), 2, stoi(mapaInscritos[codigo][MujerSegundoSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"][0])]),
-        stoi(mapaAdmitidos[codigo][MujerSegundoSemestre][findPos("ADMITIDOS", mapaAdmitidos["HEAD"][0])]), stoi(mapaMatriculados[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]),
-        stoi(mapaMatriculados[codigo][MujerSegundoSemestre][findPos("MATRICULADOS", mapaMatriculados["HEAD"][0])]), stoi(mapaGraduados[codigo][MujerSegundoSemestre][findPos("GRADUADOS", mapaGraduados["HEAD"][0])]));
-
-        consolidados.push_back(HombresPrimerSemestreConsolidadoAno1);
-        consolidados.push_back(HombresSegundoSemestreConsolidadoAno1);
-        consolidados.push_back(MujeresPrimerSemestreConsolidadoAno1);
-        consolidados.push_back(MujeresSegundoSemestreConsolidadoAno1);
-        consolidados.push_back(HombresPrimerSemestreConsolidadoAno2);
-        consolidados.push_back(HombresSegundoSemestreConsolidadoAno2);
-        consolidados.push_back(MujeresPrimerSemestreConsolidadoAno2);
-        consolidados.push_back(MujeresSegundoSemestreConsolidadoAno2);
-        prog->setVecConsolidados(consolidados);
-        programasAcademicos[stoi(codigo)] = prog;
     }
 }
 
@@ -117,11 +127,11 @@ void SNIESController::buscarProgramas(bool flag, string &palabraClave, int idCom
     {
         bool creado;
         // 1 para csv, 2 para txt // 3 para json
-        if(opcionOutput == 1)
+        if (opcionOutput == 1)
             creado = csvWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
-        else if(opcionOutput == 2)
+        else if (opcionOutput == 2)
             creado = txtWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
-        else if(opcionOutput == 3)
+        else if (opcionOutput == 3)
             cout << "PROXIMAMENTE" << endl;
     }
 }
@@ -261,17 +271,16 @@ void SNIESController::calcularDatosExtra(bool flag)
         bool creado;
         creado = csvWriter.crearArchivoExtra(rutaOutput, matrizFinal);
         // 1 para csv, 2 para txt // 3 para json
-        if(opcionOutput == 1)
+        if (opcionOutput == 1)
             creado = csvWriter.crearArchivoExtra(rutaOutput, matrizFinal);
-        else if(opcionOutput == 2)
+        else if (opcionOutput == 2)
             creado = txtWriter.crearArchivoExtra(rutaOutput, matrizFinal);
-        else if(opcionOutput == 3)
+        else if (opcionOutput == 3)
             cout << "PROXIMAMENTE" << endl;
     }
 }
 
-void SNIESController::setOpcionOutput(int opcion) {
+void SNIESController::setOpcionOutput(int opcion)
+{
     opcionOutput = opcion;
 }
-
-
