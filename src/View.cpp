@@ -202,7 +202,7 @@ void View::tipoDeSalida(){
          cout << "Entendido, te espero de vuelta !" << endl;
          break;
     default:
-         cout << "Opcion invalida, por favor verifique de nuevo";
+         cout << "Opcion invalida, por favor verifique de nuevo" << endl;;
          break;
      }
 }
