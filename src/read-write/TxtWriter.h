@@ -11,11 +11,9 @@ class TxtWriter : public WriteManager{
         string txtData;
     public:
         TxtWriter();
-        void newFile(const string&) override;
-        bool loadFromFile(const string&) override;
-        bool saveToFile(const string&) override;
-        string getTxtData() const;
-        void setTxtData(const string& txtData); 
+        bool crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapadeProgramasAcademicos, vector<string> etiquetasColumnas) override;
+        bool crearArchivoBuscados(string &ruta, list<ProgramaAcademico *> &programasBuscados, vector<string> etiquetasColumnas) override;
+        bool crearArchivoExtra(string &ruta, vector<vector<string>> datosAImprimir) override;
 };
 
 

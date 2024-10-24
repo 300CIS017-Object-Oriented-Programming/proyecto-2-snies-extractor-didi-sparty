@@ -14,11 +14,9 @@ class JsonWriter : public WriteManager{
         json jsonData;
     public:
         JsonWriter();
-        void newFile(const string&) override;
-        bool loadFromFile(const string&) override;
-        bool saveToFile(const string&) override;
-        json getJson() const;
-        void setJson(const json&);
+        bool crearArchivo(string &ruta, map<int, ProgramaAcademico *> &mapadeProgramasAcademicos, vector<string> etiquetasColumnas) override;
+        bool crearArchivoBuscados(string &ruta, list<ProgramaAcademico *> &programasBuscados, vector<string> etiquetasColumnas) override;
+        bool crearArchivoExtra(string &ruta, vector<vector<string>> datosAImprimir) override;
 
 
 };
