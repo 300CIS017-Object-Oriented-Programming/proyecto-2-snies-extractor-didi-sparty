@@ -1,10 +1,9 @@
 #ifndef VIEW_H
 #define VIEW_H
 #include "SNIESController.h"
-/*Todo el codigo va entre estas guardas*/
 #include "SNIESController.h"
 #include <cctype>
-
+#include <stdexcept>
 using namespace std;
 
 class View
@@ -15,11 +14,15 @@ private:
 public:
     View();
     ~View();
+    char obtenerEntradaUsuario(const string &mensaje, const string &opcionesValidas);
     bool mostrarPantallaBienvenido();
     void mostrarDatosExtra();
     void buscarPorPalabraClaveYFormacion();
     void salir();
     bool isConvetibleToInt(const string &);
+    void tipoDeSalida();
+    string obtenerAnoValido(const string &mensaje);
+    void intercambiarAnos(string &ano1, string &ano2);
 };
 
 #endif

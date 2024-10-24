@@ -4,16 +4,14 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "Consolidado.h"
-
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
-using std::vector;
+#include "Utility.h"
+using namespace std;
 
 class ProgramaAcademico
 {
+    private:
     int codigoDeLaInstitucion;
     int iesPadre;
     string institucionDeEducacionSuperiorIes;
@@ -50,8 +48,11 @@ class ProgramaAcademico
     string municipioDeOfertaDelPrograma;
     vector<Consolidado *> consolidados;
 
+
 public:
     ProgramaAcademico();
+    ProgramaAcademico(vector<vector<string>>&, vector<string>&);  //  pasamos un vector con todos los encabezados 
+    ~ProgramaAcademico();
 
     void setCodigoDeLaInstitucion(int);
     int getCodigoDeLaInstitucion();
@@ -114,35 +115,52 @@ public:
 
     void setIdArea(int);
     int getIdArea();
+
     void setAreaDeConocimiento(string &);
     string getAreaDeConocimiento();
+
     void setIdNucleo(int);
     int getIdNucleo();
+
     void setNucleoBasicoDelConocimientoNbc(string &);
     string getNucleoBasicoDelConocimientoNbc();
+
     void setIdCineCampoAmplio(int);
     int getIdCineCampoAmplio();
+
     void setDescCineCampoAmplio(string &);
     string getDescCineCampoAmplio();
+
     void setIdCineCampoEspecifico(int);
     int getIdCineCampoEspecifico();
+
     void setDescCineCampoEspecifico(string &);
     string getDescCineCampoEspecifico();
+
     void setIdCineCodigoDetallado(int);
     int getIdCineCodigoDetallado();
+
     void setDescCineCodigoDetallado(string &);
     string getDescCineCodigoDetallado();
+
     void setCodigoDelDepartamentoPrograma(int);
     int getCodigoDelDepartamentoPrograma();
+
     void setDepartamentoDeOfertaDelPrograma(string &);
     string getDepartamentoDeOfertaDelPrograma();
+
     void setCodigoDelMunicipioPrograma(int);
     int getCodigoDelMunicipioPrograma();
+
     void setMunicipioDeOfertaDelPrograma(string &);
     string getMunicipioDeOfertaDelPrograma();
+
     void setConsolidado(Consolidado *, int);
+
     Consolidado *getConsolidado(int);
-    ~ProgramaAcademico();
+
+    void setVecConsolidados(vector<Consolidado *> &);
+
 };
 
 #endif

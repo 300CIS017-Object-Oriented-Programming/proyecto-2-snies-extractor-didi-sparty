@@ -2,17 +2,8 @@
 
 View::View()
 {
-    // NEW quitar estas variables de aquí y del constructor del SNIESController
-    //  estas constantes las leerá el SNIESController del archivo de Settings.h
-    //  Completar el archivo con el resto de constantes necesarias
-    string ruta1 = string("C:/SNIES_EXTRACTOR/inputs/programas.csv");
-    string ruta2 = string("C:/SNIES_EXTRACTOR/inputs/admitidos");
-    string ruta3 = string("C:/SNIES_EXTRACTOR/inputs/graduados");
-    string ruta4 = string("C:/SNIES_EXTRACTOR/inputs/inscritos");
-    string ruta5 = string("C:/SNIES_EXTRACTOR/inputs/matriculados");
-    string ruta6 = string("C:/SNIES_EXTRACTOR/inputs/matriculadosPrimerSemestre");
-    string ruta7 = string("C:/SNIES_EXTRACTOR/outputs/");
-    controlador = SNIESController(ruta1, ruta2, ruta3, ruta4, ruta5, ruta6, ruta7);
+
+    controlador = SNIESController();
 }
 
 View::~View()
@@ -20,81 +11,67 @@ View::~View()
     controlador.~SNIESController();
 }
 
+char View::obtenerEntradaUsuario(const string &mensaje, const string &opcionesValidas)
+{
+    char entrada;
+    int i = 0;
+    while (i == 0)
+    {
+        cout << mensaje << endl;
+        cin >> entrada;
+        entrada = tolower(entrada);
+        if (opcionesValidas.find(entrada) != string::npos) i=1;
+        else cout << "Entrada no válida. Intente de nuevo." << endl;
+    }
+    return entrada;
+}
+
+string View::obtenerAnoValido(const string &mensaje)
+{
+    string ano;
+    int i = 0;
+    while (i == 0)
+    {
+        cout << mensaje << endl;
+        cin >> ano;
+        if (isConvetibleToInt(ano)) i=1;
+        else cout << "El valor ingresado fue invalido! Por favor ingrese un valor valido." << endl;
+    }
+    return ano;
+}
+
+void View::intercambiarAnos(string &ano1, string &ano2)
+{
+    if (stoi(ano2) < stoi(ano1))
+    {
+        string temp = ano1;
+        ano1 = ano2;
+
+        ano2 = temp;
+    }
+}
+
 bool View::mostrarPantallaBienvenido()
 {
     bool parametrizacionBool = false;
 
-    cout << "Bienvenido al SNIES-Extractor!" << endl;
-    cout << "=========================================" << endl;
     cout << "Recuerde que para el correcto funcionamiento del programa tuvo que haber parametrizado" << endl;
     cout << "antes la carpeta SNIES_EXTRACTOR en el disco duro C:, con sus respectivas carpetas inputs y outputs" << endl;
     cout << "y todos los archivo CSV del SNIES." << endl;
-    cout << "Si ya hizo esto, escriba 'Y', de lo contrario 'N', y Enter: " << endl;
-    char userAnswer = 'Y'; // FIXME cuando se arregle el debugger
-    // cin >> userAnswer;
-    // cout << endl;
-    // FIXME verificar que el usuario ingree un valor igual al esperado incluir todo dentro de un while para
-    // para asegurar que el usuario ingrese un valor valido
-    // pasarlo a un método que se pueda usar en otros lugares
-    userAnswer = static_cast<char>(tolower(userAnswer));
+
+    char userAnswer = obtenerEntradaUsuario("Si ya hizo esto, escriba 'Y', de lo contrario 'N', y Enter: ", "yn");
+
     if (userAnswer == 'y')
     {
         parametrizacionBool = true;
 
         string userText;
-        cout << "A continuacion se procesaran los datos de los programas academicos seleccionados en /programas.csv..." << endl;
+        cout << "A continuacion se procesaran los datos de los programas academicos seleccionados..." << endl;
 
-        string anio1("abc");
-        string ano2("abc");
-        string anoAux;
-        int i = 0;
-        bool anosValido = false;
-        // FIXME pasar la lógica del bucle a un método reutlizable
-        // Usar en el while una bandera y simplificar el código
-        // Bucle para leer un valor valido del año1
-        while (!(isConvetibleToInt(anio1)))
-        {
-            if (i == 1)
-            {
-                cout << "El valor ingresado fue invalido!" << endl;
-                cout << "Por favor ingrese un valor valido la proxima" << endl;
-                cout << "Presione 'OK' y Enter para continuar: " << endl;
-                cin >> userText;
-                cout << endl;
-            }
-            cout << "Escriba el primer ano de busqueda: " << endl;
-            cin >> anio1;
-            cout << endl;
-            i = 1;
-        }
+        string anio1 = obtenerAnoValido("Escriba el primer ano de busqueda: ");
+        string ano2 = obtenerAnoValido("Escriba el segundo ano de busqueda: ");
 
-        i = 0;
-        // Bucle para leer un valor valido del año2
-        while (!(isConvetibleToInt(ano2)))
-        {
-            if (i == 1)
-            {
-                cout << "El valor ingresado fue invalido!" << endl;
-                cout << "Por favor ingrese un valor valido la proxima" << endl;
-                cout << "Presione 'OK' y Enter para continuar: " << endl;
-                cin >> userText;
-                cout << endl;
-            }
-            cout << "Escriba el segundo ano de busqueda: " << endl;
-            cin >> ano2;
-            cout << endl;
-            i = 1;
-        }
-
-        // Organizo los años
-        // FIXME: Crear un método para hacer que el segundo año sea siempre
-        // mayor que el primer año
-        if (stoi(ano2) < stoi(anio1))
-        {
-            anoAux = anio1;
-            anio1 = ano2;
-            ano2 = anoAux;
-        }
+        intercambiarAnos(anio1, ano2);
 
         cout << "Procesando datos ..." << endl;
         controlador.procesarDatosCsv(anio1, ano2);
@@ -102,6 +79,7 @@ bool View::mostrarPantallaBienvenido()
     }
     return parametrizacionBool;
 }
+
 
 void View::salir()
 {
@@ -114,7 +92,7 @@ void View::mostrarDatosExtra()
 {
     char opcionYN;
     cout << "A continuacion vamos a mostrar datos relevantes de los programas academicos seleccionados" << "\n"
-         << endl;
+        << endl;
     cout << "Desea Convertir los datos a un archivo CSV?(Y/N): " << endl;
     cin >> opcionYN;
     opcionYN = tolower(opcionYN);
@@ -202,4 +180,29 @@ bool View::isConvetibleToInt(const string &str)
         // No se pudo convertir: el número está fuera del rango de int
         return false;
     }
+}
+
+  //  Menu para preguntar el tipo de salida que el usuario desea la informacion
+void View::tipoDeSalida(){
+    cout << "Bienvenido al SNIES-Extractor!" << endl;
+    cout << "=========================================" << endl;
+    int opcion;
+    cout << "Desea imprimir la informacion?\n1.Si\n2.No" << endl;
+    cin >> opcion;
+    switch (opcion)
+    {
+    case 1:
+        cout << "Por favor indique el tipo de archivo que desea para su informacion"
+                "\n1. CSV FILE\n2. TXT FILE\n3. JSON FILE" << endl;
+        int opcionFile;
+        cin >> opcionFile;
+        controlador.setOpcionOutput(opcionFile);
+         break;
+    case 2:
+         cout << "Entendido, te espero de vuelta !" << endl;
+         break;
+    default:
+         cout << "Opcion invalida, por favor verifique de nuevo" << endl;;
+         break;
+     }
 }

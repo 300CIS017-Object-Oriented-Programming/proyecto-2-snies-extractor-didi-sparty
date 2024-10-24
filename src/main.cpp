@@ -3,6 +3,7 @@
 int main()
 {
     View menu;
+    menu.tipoDeSalida();
     bool archivosParametrizados = menu.mostrarPantallaBienvenido();
     if (archivosParametrizados)
     {
