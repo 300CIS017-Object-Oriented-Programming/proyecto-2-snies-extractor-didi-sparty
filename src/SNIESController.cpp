@@ -97,11 +97,11 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
             prog->setVecConsolidados(consolidados);
             programasAcademicos[stoi(codigo)] = prog;
     } catch (const out_of_range &e) {
-        cerr << "Error: Acceso fuera de rango en los mapas: " << e.what() << endl;
+        cerr << "Error: Acceso fuera de rango en los mapas: " << e.what() << endl;  // Error: Acceso fuera de rango en los mapas: map::at
     } catch (const invalid_argument &e) {
-        cerr << "Error: Conversión inválida de string a int: " << e.what() << endl;
+        cerr << "Error: Conversión inválida de string a int: " << e.what() << endl; // Error: Conversión inválida de string a int: stoi
     } catch (const exception &e) {
-        cerr << "Error inesperado " << e.what() << endl;
+        cerr << "Error inesperado " << e.what() << endl;  // Maneja el caso de algún error inesperado 
     }
 
     }
@@ -110,29 +110,51 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2)
 void SNIESController::buscarProgramas(bool flag, string &palabraClave, int idComparacion)
 {
     list<ProgramaAcademico *> listaProgramas;
-    for (map<int, ProgramaAcademico *>::iterator it = programasAcademicos.begin(); it != programasAcademicos.end(); ++it)
+    try
     {
-        ProgramaAcademico *programa = it->second;
-        string nombre = programa->getProgramaAcademico();
-        int id = programa->getIdNivelDeFormacion();
-        if (nombre.find(palabraClave) != string::npos && id == idComparacion)
+        for (map<int, ProgramaAcademico *>::iterator it = programasAcademicos.begin(); it != programasAcademicos.end(); ++it)
         {
-            listaProgramas.push_back(programa);
-            // codigo SNIES, nombre del programa, codigo de la institucion, nombre de la institucion y metodología
-            cout << programa->getCodigoSniesDelPrograma() << ";" << programa->getProgramaAcademico() << ";" << programa->getCodigoDeLaInstitucion() << ";" << programa->getInstitucionDeEducacionSuperiorIes() << ";" << programa->getMetodologia() << endl;
+            ProgramaAcademico *programa = it->second;
+            string nombre = programa->getProgramaAcademico();
+            int id = programa->getIdNivelDeFormacion();
+            if (nombre.find(palabraClave) != string::npos && id == idComparacion)
+            {
+                listaProgramas.push_back(programa);
+                // codigo SNIES, nombre del programa, codigo de la institucion, nombre de la institucion y metodología
+                cout << programa->getCodigoSniesDelPrograma() << ";" << programa->getProgramaAcademico() << ";" << programa->getCodigoDeLaInstitucion() << ";" << programa->getInstitucionDeEducacionSuperiorIes() << ";" << programa->getMetodologia() << endl;
+            }
         }
     }
-
+    catch (const std::out_of_range &e)
+    {
+        cerr << "Error: Acceso fuera de rango en el mapa programasAcademicos: " << e.what() << endl;
+    }
+    catch (const std::exception &e)
+    {
+        cerr << "Error inesperado durante la búsqueda de programas: " << e.what() << endl;
+    }
     if (flag)
     {
         bool creado;
-        // 1 para csv, 2 para txt // 3 para json
-        if (opcionOutput == 1)
-            creado = csvWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
-        else if (opcionOutput == 2)
-            creado = txtWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
-        else if (opcionOutput == 3)
-            cout << "PROXIMAMENTE" << endl;
+        try
+        {
+            // 1 para csv, 2 para txt // 3 para json
+            if (opcionOutput == 1)
+                creado = csvWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
+            else if (opcionOutput == 2)
+                creado = txtWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
+            else if (opcionOutput == 3)
+                cout << "PROXIMAMENTE" << endl;
+
+            if (!creado)
+            {
+                cerr << "Error: No se pudo crear el archivo de salida." << endl;  // Manejo del caso en que no se pudo crear el archivo de salida.
+            }
+        }
+        catch (const std::exception &e)
+        {
+            cerr << "Error al crear el archivo de salida: " << e.what() << endl;  // Manejo de error al crear el archivo de salida 
+        }
     }
 }
 
@@ -244,7 +266,7 @@ void SNIESController::calcularDatosExtra(bool flag)
         if ((SumaNeosPrimerSemestre == 0 && SumaNeosSegundoSemestre == 0 && SumaNeosTercerSemestre == 0) || (SumaNeosSegundoSemestre == 0 && SumaNeosTercerSemestre == 0 && SumaNeosCuartoSemestre == 0))
         {
             etiquetas3 = {to_string(programa->getCodigoSniesDelPrograma()),
-                          programa->getProgramaAcademico()};
+                        programa->getProgramaAcademico()};
         }
     }
     etiquetas1 = {to_string(sumaPrimerAno), to_string(sumaSegundoAno)};
