@@ -1,5 +1,6 @@
 #include "Utility.h"
 
+
 int findPos(const string &busqueda, vector<string> &vec)
 {
     //  Devuelve la posición del vector
@@ -18,7 +19,7 @@ int findPos(const string &busqueda, vector<string> &vec)
     return out; // devuelve el indice numérico
 }
 
-vector<int> buscarPosiciones(vector<string> & headers)
+vector<int> buscarPosiciones(vector<string> &headers)
 {
     vector<string> palabras = {"SEXO", "AÑO", "SEMESTRE", "ADMITIDOS", "MATRICULADOS", "GRADUADOS", "INSCRITOS", "MATRICULADOS PRIMER SEMESTRE"};
     vector<int> posiciones;

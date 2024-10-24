@@ -3,8 +3,7 @@
 
 
 
-vector<string> CsvReader::leerProgramasCsv()
-{
+vector<string> CsvReader::leerProgramasCsv() {
     vector<string> codigosSniesRetorno;
     ifstream archivoProgramasCsv(Settings::PROGRAMAS_FILTRAR_FILE_PATH);
     if (!(archivoProgramasCsv.is_open()))

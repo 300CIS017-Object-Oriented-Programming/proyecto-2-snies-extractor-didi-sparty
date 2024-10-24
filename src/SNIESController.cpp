@@ -2,6 +2,21 @@
 
 using namespace std;
 
+
+int findRightRow(int columnaUno, int columnaDos, string &valueColumnaUno, string &valueColumnaDos, vector<vector<string>> &data) {
+    
+    int out = 0, i = 0;
+    for (const auto &fila : data) {
+        if (fila[columnaUno] == valueColumnaUno && fila[columnaDos] == valueColumnaDos) {
+            out = i;
+        }
+        i++;
+    }
+    return out;
+
+}
+
+
 SNIESController::SNIESController() {}
 
 SNIESController::~SNIESController()
@@ -18,9 +33,32 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2) {
     string admitidos = "admitidos" + ano1 + ".csv";
     string graduados = "graduados" + ano1 + ".csv";
     string inscritos = "inscritos" + ano1 + ".csv";
-    map<string, vector<vector<string>>> mapaLectura = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
-
+    map<string, vector<vector<string>>> mapaAdmitidos = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
+    map<string, vector<vector<string>>> mapaGraduados = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
+    map<string, vector<vector<string>>> mapaInscritos = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
     vector<ProgramaAcademico> programasAcademicos;
+    int i = 0;
+    for (const auto &codigo : codigosSnies) {
+        programasAcademicos.push_back(ProgramaAcademico(mapaLectura[string], mapaLectura["HEAD"][0]));
+        vector<Consolidado*> consolidados;
+        int posColSemestre = findPos(mapaAdmitidos["HEAD"], "SEMESTRE"), posColSexo = findPos(mapaAdmitidos["HEAD"], "ID SEXO");
+        int HombrePrimerSemestre = findRightRow(posColSemestre, posColSexo,), MujerPrimerSemestre = findRightRow(posColSemestre, posColSexo) 
+        int HombreSegundoSemestre = findRightRow(posColSemestre, posColSexo), MujerSegundoSemestre = findRightRow(posColSemestre, posColSexo);
+        new Consolidado (
+            1, "Hombre", stoi(ano1), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS",mapaInscritos["HEAD"])]),
+            stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS",mapaAdmitidos["HEAD"])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS",mapaMatriculados["HEAD"])]),
+            
+        );
+        
+
+
+        i++;
+    }
+    
+
+        
+
+    
 
 
 
@@ -221,7 +259,7 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2) {
     }
 
     bool archivoCreado;
-    archivoCreado = gestorCsvObj.crearArchivo(rutaOutput, programasAcademicos, etiquetasColumnas);
+    archivoCreado = csvWriter.crearArchivo(rutaOutput, programasAcademicos, etiquetasColumnas);
     // cout << archivoCreado << endl;
 }
 
@@ -244,7 +282,7 @@ void SNIESController::buscarProgramas(bool flag, string &palabraClave, int idCom
     if (flag)
     {
         bool creado;
-        creado = gestorCsvObj.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
+        creado = csvWriter.crearArchivoBuscados(rutaOutput, listaProgramas, etiquetasColumnas);
     }
 }
 
@@ -381,7 +419,7 @@ void SNIESController::calcularDatosExtra(bool flag)
     if (flag)
     {
         bool creado;
-        creado = gestorCsvObj.crearArchivoExtra(rutaOutput, matrizFinal);
+        creado = csvWriter.crearArchivoExtra(rutaOutput, matrizFinal);
     }
 }
 

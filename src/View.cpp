@@ -202,3 +202,40 @@ bool View::isConvetibleToInt(const string &str)
         return false;
     }
 }
+
+  //  Menu para preguntar el tipo de salida que el usuario desea la informacion
+void View::tipoDeSalida(){
+    int opcion = 0;
+    cout << "Desea imprimir la informacion?\n1.Si\n2.No" << endl;
+    cin >> opcion;
+    switch (opcion)
+    {
+    case 1:
+        cout << "Por favor indique el tipo de archivo que desea para su informacion"
+                "1. CSV FILE\n2. JSON FILE\n3. TXT FILE" << endl;
+        int opcionFile = 0;
+        cin >> opcionFile;
+        switch (opcionFile)
+        {
+        case 1:
+            controlador.csvOutput();
+            break;
+        
+        case 2:
+            controlador.jsonOutput();
+            break;
+        case 3:
+            controlador.txtOutput();
+        default:
+            cout << "Opcion no valida" << endl;
+            break;
+        }
+        break;
+    case 2:
+        cout << "Entendido, te espero de vuelta !" << endl;
+        break;
+    default:
+        cout << "Opcion invalida, por favor verifique de nuevo"
+        break;
+    } 
+}

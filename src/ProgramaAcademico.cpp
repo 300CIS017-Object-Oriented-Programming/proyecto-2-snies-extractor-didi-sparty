@@ -7,8 +7,7 @@ ProgramaAcademico::ProgramaAcademico()
     consolidados = vector<Consolidado *>(8);
 }
 
-ProgramaAcademico::ProgramaAcademico(vector<vector<string>>& datos, vector<string>& headers)
-{
+ProgramaAcademico::ProgramaAcademico(vector<vector<string>>& datos, vector<string>& headers) {
     setCodigoDeLaInstitucion(stoi(datos[0][findPos("CÓDIGO DE LA INSTITUCIÓN", headers)]));          // CÓDIGO DE LA INSTITUCIÓN
     setIesPadre(stoi(datos[0][findPos("IES_PADRE", headers)]));                                      // IES_PADRE
     setInstitucionDeEducacionSuperiorIes(datos[0][findPos("INSTITUCIÓN DE EDUCACIÓN SUPERIOR (IES)", headers)]); // INSTITUCIÓN DE EDUCACIÓN SUPERIOR (IES)
@@ -43,7 +42,7 @@ ProgramaAcademico::ProgramaAcademico(vector<vector<string>>& datos, vector<strin
     setDepartamentoDeOfertaDelPrograma(datos[0][findPos("DEPARTAMENTO DE OFERTA DEL PROGRAMA", headers)]);       // DEPARTAMENTO DE OFERTA DEL PROGRAMA
     setCodigoDelMunicipioPrograma(stoi(datos[0][findPos("CÓDIGO DEL MUNICIPIO (PROGRAMA)", headers)]));          // CÓDIGO DEL MUNICIPIO (PROGRAMA)
     setMunicipioDeOfertaDelPrograma(datos[0][findPos("MUNICIPIO DE OFERTA DEL PROGRAMA", headers)]);             // MUNICIPIO DE OFERTA DEL PROGRAMA
-}
+
 
     void ProgramaAcademico::setCodigoDeLaInstitucion(int nuevoCodigoDeLaInstitucion)
 {
@@ -371,6 +370,8 @@ string ProgramaAcademico::getMunicipioDeOfertaDelPrograma()
 {
     return municipioDeOfertaDelPrograma;
 }
+
+
 
 void ProgramaAcademico::setConsolidado(Consolidado *nuevoConsolidado, int pos)
 {

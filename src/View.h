@@ -20,6 +20,7 @@ public:
     void buscarPorPalabraClaveYFormacion();
     void salir();
     bool isConvetibleToInt(const string &);
+    void tipoDeSalida();
 };
 
 #endif
