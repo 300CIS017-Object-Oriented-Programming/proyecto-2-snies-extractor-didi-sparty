@@ -2,16 +2,8 @@
 
 View::View()
 {
-    // NEW quitar estas variables de aquí y del constructor del SNIESController
-    //  estas constantes las leerá el SNIESController del archivo de Settings.h
-    //  Completar el archivo con el resto de constantes necesarias
-    string ruta2 = string("C:/SNIES_EXTRACTOR/inputs/admitidos");
-    string ruta3 = string("C:/SNIES_EXTRACTOR/inputs/graduados");
-    string ruta4 = string("C:/SNIES_EXTRACTOR/inputs/inscritos");
-    string ruta5 = string("C:/SNIES_EXTRACTOR/inputs/matriculados");
-    string ruta6 = string("C:/SNIES_EXTRACTOR/inputs/matriculadosPrimerSemestre");
-    string ruta7 = string("C:/SNIES_EXTRACTOR/outputs/");
-    controlador = SNIESController(ruta2, ruta3, ruta4, ruta5, ruta6, ruta7);
+
+    controlador = SNIESController();
 }
 
 View::~View()
@@ -215,27 +207,27 @@ void View::tipoDeSalida(){
                 "1. CSV FILE\n2. JSON FILE\n3. TXT FILE" << endl;
         int opcionFile = 0;
         cin >> opcionFile;
-        switch (opcionFile)
-        {
-        case 1:
-            controlador.csvOutput();
-            break;
-        
-        case 2:
-            controlador.jsonOutput();
-            break;
-        case 3:
-            controlador.txtOutput();
-        default:
-            cout << "Opcion no valida" << endl;
-            break;
-        }
-        break;
-    case 2:
-        cout << "Entendido, te espero de vuelta !" << endl;
-        break;
-    default:
-        cout << "Opcion invalida, por favor verifique de nuevo"
-        break;
-    } 
+    //     switch (opcionFile)
+    //     {
+    //     case 1:
+    //         controlador.csvOutput();
+    //         break;
+    //
+    //     case 2:
+    //         controlador.jsonOutput();
+    //         break;
+    //     case 3:
+    //         controlador.txtOutput();
+    //     default:
+    //         cout << "Opcion no valida" << endl;
+    //         break;
+    //     }
+    //     break;
+    // case 2:
+    //     cout << "Entendido, te espero de vuelta !" << endl;
+    //     break;
+    // default:
+    //     cout << "Opcion invalida, por favor verifique de nuevo";
+    //     break;
+     }
 }

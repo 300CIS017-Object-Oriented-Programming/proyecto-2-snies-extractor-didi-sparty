@@ -13,6 +13,7 @@
 #include "read-write/WriteManager.h"
 #include "read-write/JsonWriter.h"
 #include "read-write/TxtWriter.h"
+#include "Utility.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ class SNIESController
 
 private:
     map<int, ProgramaAcademico *> programasAcademicos;
-    ProgramaAcademico programasAcademics;
+
     CsvReader CsvReaderObj;
     CsvWriter csvWriter;
     JsonWriter jsonWriter;
@@ -37,6 +38,7 @@ private:
 public:
     SNIESController() = default;
     ~SNIESController();
+    int findRightRow(int columna_uno, int columna_dos, char value_columna_uno, char value_columna_dos, const vector<vector<string>>& data);
     void procesarDatosCsv(string &, string &);
     void calcularDatosExtra(bool);
     void buscarProgramas(bool, string &, int);

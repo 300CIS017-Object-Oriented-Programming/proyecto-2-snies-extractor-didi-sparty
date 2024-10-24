@@ -6,7 +6,7 @@
 #include <iostream>
 #include <algorithm>
 #include "Consolidado.h"
-
+#include "Utility.h"
 using namespace std;
 
 class ProgramaAcademico
@@ -157,7 +157,6 @@ public:
     void setConsolidado(Consolidado *, int);
 
     Consolidado *getConsolidado(int);
-    int findPos(const string &busqueda, vector<string> &vec);
 
     void setVecConsolidados(vector<Consolidado *> &);
 };
