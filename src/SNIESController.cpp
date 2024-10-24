@@ -36,19 +36,31 @@ void SNIESController::procesarDatosCsv(string &ano1, string &ano2) {
     map<string, vector<vector<string>>> mapaAdmitidos = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
     map<string, vector<vector<string>>> mapaGraduados = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
     map<string, vector<vector<string>>> mapaInscritos = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
+    string admitidos = "admitidos" + ano2 + ".csv";
+    string graduados = "graduados" + ano2 + ".csv";
+    string inscritos = "inscritos" + ano2 + ".csv";
+    map<string, vector<vector<string>>> mapaAdmitidos2 = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
+    map<string, vector<vector<string>>> mapaGraduados2 = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
+    map<string, vector<vector<string>>> mapaInscritos2 = CsvReaderObj.leerArchivo(admitidos, codigosSnies);
+    
+    
     vector<ProgramaAcademico> programasAcademicos;
     int i = 0;
     for (const auto &codigo : codigosSnies) {
         programasAcademicos.push_back(ProgramaAcademico(mapaLectura[string], mapaLectura["HEAD"][0]));
         vector<Consolidado*> consolidados;
         int posColSemestre = findPos(mapaAdmitidos["HEAD"], "SEMESTRE"), posColSexo = findPos(mapaAdmitidos["HEAD"], "ID SEXO");
-        int HombrePrimerSemestre = findRightRow(posColSemestre, posColSexo,), MujerPrimerSemestre = findRightRow(posColSemestre, posColSexo) 
-        int HombreSegundoSemestre = findRightRow(posColSemestre, posColSexo), MujerSegundoSemestre = findRightRow(posColSemestre, posColSexo);
+        int HombrePrimerSemestre = findRightRow(posColSemestre, posColSexo, '1', '1' ), MujerPrimerSemestre = findRightRow(posColSemestre, posColSexo, '1', '2') 
+        int HombreSegundoSemestre = findRightRow(posColSemestre, posColSexo, '2', '1'), MujerSegundoSemestre = findRightRow(posColSemestre, posColSexo, '2', '2');
         new Consolidado (
             1, "Hombre", stoi(ano1), 1, stoi(mapaInscritos[codigo][HombrePrimerSemestre][findPos("INSCRITOS",mapaInscritos["HEAD"])]),
             stoi(mapaAdmitidos[codigo][HombrePrimerSemestre][findPos("ADMITIDOS",mapaAdmitidos["HEAD"])]), stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS",mapaMatriculados["HEAD"])]),
-            
+            stoi(mapaMatriculados[codigo][HombrePrimerSemestre][findPos("MATRICULADOS",mapaMatriculados["HEAD"])]), stoi(maoaGraduados[codigo][HombrePrimerSemestre][findPos("GRADUADOS",mapaGraduados["HEAD"])])
         );
+
+        new Consolidado (
+            1, "Hombre", stoi(ano2), 2, stoi(mapaInscritos[codigo][HombreSegundoSemestre][findPos("INSCRITOS", mapaInscritos["HEAD"])]),
+        )
         
 
 
