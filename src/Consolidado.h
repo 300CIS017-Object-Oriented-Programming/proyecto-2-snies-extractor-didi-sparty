@@ -56,6 +56,7 @@ public:
 
     int getGraduados();
     void setGraduados(int);
+    
 };
 
 #endif // CONSOLIDADO_H
